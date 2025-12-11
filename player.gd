@@ -107,6 +107,10 @@ func _physics_process(delta: float) -> void:
 		velocity.z = lerp(velocity.z, target.z, acceleration * air_control * delta)
 
 	# Apply gravity
-	velocity.y -= gravity * delta
+# Disable gravity while grabbing
+	if left_grabbing or right_grabbing:
+		velocity.y -= 0.0
+	else:
+		velocity.y -= gravity * delta
 
 	move_and_slide()
