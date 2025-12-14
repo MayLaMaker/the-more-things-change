@@ -25,8 +25,11 @@ var left_prev_pos: Vector3
 var right_prev_pos: Vector3
 @export var can_climb: bool = true
 @export var climb_strength: float = 1.0
-var left_grip_strength := 1.0
-var right_grip_strength := 1.0
+var grip_effect: float = 0.0
+@export var grip_sliderate: float = 10
+
+var left_grip: float = 0.0
+var right_grip: float = 0.0
 
 # Both-hand climbing
 var both_hands_grabbing: bool = false
@@ -42,28 +45,30 @@ func can_grab(hand_cast: ShapeCast3D, L1: ShapeCast3D, L2: ShapeCast3D) -> bool:
 		return false
 	return true
 
-# --- Grab Functions ---
-func _on_left_controller_button_pressed(name: String) -> void:
-	if name == "grip_click" and can_grab(left_hand_grab_cast, left_L1, left_L2):
-		left_grabbing = true
-		left_prev_pos = left_hand.global_transform.origin
+# --- Grab Functions (analog grip) ---
+func _on_left_controller_input_float_changed(name: String, value: float) -> void:
+	if name == "grip":
+		left_grip = value
+		if value > 0.0 and not left_grabbing:
+			# Only check collision when starting grab
+			if can_grab(left_hand_grab_cast, left_L1, left_L2):
+				left_grabbing = true
+				left_prev_pos = left_hand.global_transform.origin
+		elif value <= 0.0:
+			left_grabbing = false
 
-func _on_left_controller_button_released(name: String) -> void:
-	if name == "grip_click":
-		left_grabbing = false
-		left_prev_pos = left_hand.global_transform.origin
+func _on_right_controller_input_float_changed(name: String, value: float) -> void:
+	if name == "grip":
+		right_grip = value
+		if value > 0.0 and not right_grabbing:
+			# Only check collision when starting grab
+			if can_grab(right_hand_grab_cast, right_L1, right_L2):
+				right_grabbing = true
+				right_prev_pos = right_hand.global_transform.origin
+		elif value <= 0.0:
+			right_grabbing = false
 
-func _on_right_controller_button_pressed(name: String) -> void:
-	if name == "grip_click" and can_grab(right_hand_grab_cast, right_L1, right_L2):
-		right_grabbing = true
-		right_prev_pos = right_hand.global_transform.origin
-
-func _on_right_controller_button_released(name: String) -> void:
-	if name == "grip_click":
-		right_grabbing = false
-		right_prev_pos = right_hand.global_transform.origin
-
-# --- Movement ---
+# --- Movement Input ---
 func _on_left_controller_input_vector_2_changed(name: String, value: Vector2) -> void:
 	input_vector = value
 
@@ -123,16 +128,18 @@ func _physics_process(delta: float) -> void:
 		velocity.x = lerp(velocity.x, target.x, acceleration * air_control * delta)
 		velocity.z = lerp(velocity.z, target.z, acceleration * air_control * delta)
 
-	# --- Gravity Toggle ---r
+# --- Grab Sliding (smooth) ---
 	if left_grabbing or right_grabbing:
-		velocity.y -= 0.0
+		# Determine the strongest grip value between both hands
+		var target_grip = max(left_grip, right_grip) # strongest hand
+		# Smoothly interpolate current grip effect toward the target grip
+		grip_effect = lerp(grip_effect, target_grip, 0.1) # smooth transition
+		# Apply gravity scaled by grip effect and fall rate (1 = hold, 0 = full fall)
+		velocity.y -= gravity * (1.0 - grip_effect) * grip_sliderate * delta
 	else:
+		# Smoothly reset grip effect when hands are released
+		grip_effect = lerp(grip_effect, 0.0, 0.1) # smooth fall when released
+		# Apply full gravity scaled by fall rate
 		velocity.y -= gravity * delta
 
 	move_and_slide()
-	
-	
-
-
-func _on_left_controller_input_float_changed(name: String, value: float) -> void:
-	pass # Replace with function body.
