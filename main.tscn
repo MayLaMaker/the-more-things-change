@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://tktbv6he63n6"]
+[gd_scene load_steps=27 format=3 uid="uid://tktbv6he63n6"]
 
 [ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://byq66buv4im4p" path="res://player.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bgrenugb6a3o2" path="res://Slope Test.fbx" id="3_h2yge"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
 size = Vector3(50, 0.1, 50)
@@ -9,17 +10,17 @@ size = Vector3(50, 0.1, 50)
 [sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
 size = Vector3(50, 0.1, 50)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_h2yge"]
-size = Vector3(0.1, 25, 0.1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
-size = Vector3(0.1, 25, 0.1)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
 size = Vector3(0.13, 25, 0.13)
 
 [sub_resource type="BoxMesh" id="BoxMesh_1bvp3"]
 size = Vector3(0.13, 25, 0.13)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h2yge"]
+size = Vector3(0.1, 25, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
+size = Vector3(0.1, 25, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lquwl"]
 size = Vector3(0.05, 25, 0.05)
@@ -38,6 +39,53 @@ size = Vector3(0.008, 25, 0.008)
 
 [sub_resource type="BoxMesh" id="BoxMesh_272bh"]
 size = Vector3(0.008, 25, 0.008)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_lquwl"]
+height = 25.0
+radius = 0.065
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7mycd"]
+top_radius = 0.065
+bottom_radius = 0.065
+height = 25.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0xm2m"]
+height = 25.0
+radius = 0.05
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_h2yge"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 25.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_272bh"]
+height = 25.0
+radius = 0.025
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5vw27"]
+top_radius = 0.025
+bottom_radius = 0.025
+height = 25.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kek77"]
+height = 25.0
+radius = 0.013
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4c57u"]
+top_radius = 0.013
+bottom_radius = 0.013
+height = 25.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_h2yge"]
+height = 25.0
+radius = 0.004
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1bvp3"]
+top_radius = 0.004
+bottom_radius = 0.004
+height = 25.0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0xm2m"]
 
 [node name="Main" type="Node3D"]
 
@@ -59,51 +107,118 @@ shape = SubResource("BoxShape3D_0xm2m")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/CollisionShape3D"]
 mesh = SubResource("BoxMesh_h2yge")
 
-[node name="Pole 0,1m" type="StaticBody3D" parent="."]
+[node name="Climbing Test" type="Node" parent="."]
 
-[node name="CollisionShape3D 0,1m" type="CollisionShape3D" parent="Pole 0,1m"]
-shape = SubResource("BoxShape3D_h2yge")
+[node name="Square Poles" type="Node" parent="Climbing Test"]
 
-[node name="MeshInstance3D 0,1m" type="MeshInstance3D" parent="Pole 0,1m/CollisionShape3D 0,1m"]
-mesh = SubResource("BoxMesh_0xm2m")
-skeleton = NodePath("../../..")
-
-[node name="Pole 0,13m" type="StaticBody3D" parent="."]
+[node name="Square Pole 0,13m" type="StaticBody3D" parent="Climbing Test/Square Poles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36601007, 0, 0)
 
-[node name="CollisionShape3D 0,13m" type="CollisionShape3D" parent="Pole 0,13m"]
+[node name="CollisionShape3D 0,13m" type="CollisionShape3D" parent="Climbing Test/Square Poles/Square Pole 0,13m"]
 shape = SubResource("BoxShape3D_1bvp3")
 
-[node name="MeshInstance3D 0,13m" type="MeshInstance3D" parent="Pole 0,13m/CollisionShape3D 0,13m"]
+[node name="MeshInstance3D 0,13m" type="MeshInstance3D" parent="Climbing Test/Square Poles/Square Pole 0,13m/CollisionShape3D 0,13m"]
 mesh = SubResource("BoxMesh_1bvp3")
-skeleton = NodePath("../../../Pole 0,1m")
+skeleton = NodePath("../../../Square Pole 0,1m")
 
-[node name="Pole 0,05m" type="StaticBody3D" parent="."]
+[node name="Square Pole 0,1m" type="StaticBody3D" parent="Climbing Test/Square Poles"]
+
+[node name="CollisionShape3D 0,1m" type="CollisionShape3D" parent="Climbing Test/Square Poles/Square Pole 0,1m"]
+shape = SubResource("BoxShape3D_h2yge")
+
+[node name="MeshInstance3D 0,1m" type="MeshInstance3D" parent="Climbing Test/Square Poles/Square Pole 0,1m/CollisionShape3D 0,1m"]
+mesh = SubResource("BoxMesh_0xm2m")
+skeleton = NodePath("../../../../..")
+
+[node name="Square Pole 0,05m" type="StaticBody3D" parent="Climbing Test/Square Poles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.36018467, 0, 0)
 
-[node name="CollisionShape3D 0,05m" type="CollisionShape3D" parent="Pole 0,05m"]
+[node name="CollisionShape3D 0,05m" type="CollisionShape3D" parent="Climbing Test/Square Poles/Square Pole 0,05m"]
 shape = SubResource("BoxShape3D_lquwl")
 
-[node name="MeshInstance3D 0,05m" type="MeshInstance3D" parent="Pole 0,05m/CollisionShape3D 0,05m"]
+[node name="MeshInstance3D 0,05m" type="MeshInstance3D" parent="Climbing Test/Square Poles/Square Pole 0,05m/CollisionShape3D 0,05m"]
 mesh = SubResource("BoxMesh_7mycd")
-skeleton = NodePath("../../../Pole 0,13m")
+skeleton = NodePath("../../../Square Pole 0,13m")
 
-[node name="Pole 0,025m" type="StaticBody3D" parent="."]
+[node name="Square Pole 0,025m" type="StaticBody3D" parent="Climbing Test/Square Poles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72036934, 0, 0)
 
-[node name="CollisionShape3D 0,025m" type="CollisionShape3D" parent="Pole 0,025m"]
+[node name="CollisionShape3D 0,025m" type="CollisionShape3D" parent="Climbing Test/Square Poles/Square Pole 0,025m"]
 shape = SubResource("BoxShape3D_272bh")
 
-[node name="MeshInstance3D 0,025m" type="MeshInstance3D" parent="Pole 0,025m/CollisionShape3D 0,025m"]
+[node name="MeshInstance3D 0,025m" type="MeshInstance3D" parent="Climbing Test/Square Poles/Square Pole 0,025m/CollisionShape3D 0,025m"]
 mesh = SubResource("BoxMesh_5vw27")
-skeleton = NodePath("../../../Pole 0,13m")
+skeleton = NodePath("../../../Square Pole 0,13m")
 
-[node name="Pole 0,008m" type="StaticBody3D" parent="."]
+[node name="Square Pole 0,008m" type="StaticBody3D" parent="Climbing Test/Square Poles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.049897, 0, 0)
 
-[node name="CollisionShape3D 0,008m" type="CollisionShape3D" parent="Pole 0,008m"]
+[node name="CollisionShape3D 0,008m" type="CollisionShape3D" parent="Climbing Test/Square Poles/Square Pole 0,008m"]
 shape = SubResource("BoxShape3D_7mycd")
 
-[node name="MeshInstance3D 0,008m" type="MeshInstance3D" parent="Pole 0,008m/CollisionShape3D 0,008m"]
+[node name="MeshInstance3D 0,008m" type="MeshInstance3D" parent="Climbing Test/Square Poles/Square Pole 0,008m/CollisionShape3D 0,008m"]
 mesh = SubResource("BoxMesh_272bh")
-skeleton = NodePath("../../../Pole 0,13m")
+skeleton = NodePath("../../../Square Pole 0,13m")
+
+[node name="Cylindrical Poles" type="Node" parent="Climbing Test"]
+
+[node name="Cylindrical Pole 0,13m" type="StaticBody3D" parent="Climbing Test/Cylindrical Poles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35854357, 0, 0.6585767)
+
+[node name="CollisionShape3D 0,13m" type="CollisionShape3D" parent="Climbing Test/Cylindrical Poles/Cylindrical Pole 0,13m"]
+shape = SubResource("CylinderShape3D_lquwl")
+
+[node name="MeshInstance3D 0,13m" type="MeshInstance3D" parent="Climbing Test/Cylindrical Poles/Cylindrical Pole 0,13m/CollisionShape3D 0,13m"]
+mesh = SubResource("CylinderMesh_7mycd")
+skeleton = NodePath("../..")
+
+[node name="Cylindrical Pole 0,1m" type="StaticBody3D" parent="Climbing Test/Cylindrical Poles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6623721)
+
+[node name="CollisionShape3D 0,1m" type="CollisionShape3D" parent="Climbing Test/Cylindrical Poles/Cylindrical Pole 0,1m"]
+shape = SubResource("CylinderShape3D_0xm2m")
+
+[node name="MeshInstance3D 0,1m" type="MeshInstance3D" parent="Climbing Test/Cylindrical Poles/Cylindrical Pole 0,1m/CollisionShape3D 0,1m"]
+mesh = SubResource("CylinderMesh_h2yge")
+skeleton = NodePath("../../../../..")
+
+[node name="Cylindrical Pole 0,05m" type="StaticBody3D" parent="Climbing Test/Cylindrical Poles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34822, 0, 0.6582006)
+
+[node name="CollisionShape3D 0,05m" type="CollisionShape3D" parent="Climbing Test/Cylindrical Poles/Cylindrical Pole 0,05m"]
+shape = SubResource("CylinderShape3D_272bh")
+
+[node name="MeshInstance3D 0,05m" type="MeshInstance3D" parent="Climbing Test/Cylindrical Poles/Cylindrical Pole 0,05m/CollisionShape3D 0,05m"]
+mesh = SubResource("CylinderMesh_5vw27")
+skeleton = NodePath("../..")
+
+[node name="Cylindrical Pole 0,025m" type="StaticBody3D" parent="Climbing Test/Cylindrical Poles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7126658, 0, 0.6622591)
+
+[node name="CollisionShape3D 0,025m" type="CollisionShape3D" parent="Climbing Test/Cylindrical Poles/Cylindrical Pole 0,025m"]
+shape = SubResource("CylinderShape3D_kek77")
+
+[node name="MeshInstance3D 0,025m" type="MeshInstance3D" parent="Climbing Test/Cylindrical Poles/Cylindrical Pole 0,025m/CollisionShape3D 0,025m"]
+mesh = SubResource("CylinderMesh_4c57u")
+skeleton = NodePath("../..")
+
+[node name="Cylindrical Pole 0,008m" type="StaticBody3D" parent="Climbing Test/Cylindrical Poles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4341743, 0, 2.634307)
+
+[node name="CollisionShape3D 0,13m" type="CollisionShape3D" parent="Climbing Test/Cylindrical Poles/Cylindrical Pole 0,008m"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4842713, 0, -1.9767967)
+shape = SubResource("CylinderShape3D_h2yge")
+
+[node name="MeshInstance3D 0,13m" type="MeshInstance3D" parent="Climbing Test/Cylindrical Poles/Cylindrical Pole 0,008m/CollisionShape3D 0,13m"]
+mesh = SubResource("CylinderMesh_1bvp3")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+
+[node name="Slope Test" parent="." instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1196632, 0.050000012, -0.6686546)

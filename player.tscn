@@ -1,8 +1,22 @@
-[gd_scene load_steps=10 format=4 uid="uid://byq66buv4im4p"]
+[gd_scene load_steps=18 format=4 uid="uid://byq66buv4im4p"]
 
 [ext_resource type="Script" uid="uid://b1bo0o1g27ylp" path="res://player.gd" id="1_i3pqv"]
 [ext_resource type="Shape3D" uid="uid://djq7hb0dxqkfd" path="res://addons/godot-xr-tools/hands/scenes/collision/hand_digit.shape" id="2_hqtel"]
 [ext_resource type="Material" uid="uid://dy6nhifvvmm73" path="res://addons/godot-xr-tools/hands/materials/caucasian_hand.tres" id="3_i3pqv"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sweqy"]
+points = PackedVector3Array(0.1, 0, 0, 0.1, 0.1, 0, 0, 0, -0.1, 0, 0.1, -0.1, 0, 0, 0, 0, 0.1, 0)
+
+[sub_resource type="PrismMesh" id="PrismMesh_i3pqv"]
+lightmap_size_hint = Vector2i(14, 21)
+left_to_right = 0.0
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_i3pqv"]
+points = PackedVector3Array(0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.1, 0.1, 0)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2hs0m"]
+points = PackedVector3Array(0, 0, -0.1, 0, 0.1, -0.1, 0, 0, 0, 0, 0.1, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hvqyu"]
 
@@ -106,6 +120,19 @@ bind/24/pose = Transform3D(0.971349, 0.032557633, 0.2354163, 0.23541634, -0.2675
 bind/25/name = &"Palm_L"
 bind/25/bone = -1
 bind/25/pose = Transform3D(1, -3.1237055e-06, 3.1385466e-06, 3.123643e-06, 1, 1.9820302e-05, -3.1386078e-06, -1.9827967e-05, 1.0000001, -0.030780753, 0.04197279, 0.039949805)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1jxqw"]
+points = PackedVector3Array(0, 0, 0, 0, 0.1, 0, -0.1, 0, 0, -0.1, 0.1, 0, 0, 0, -0.1, 0, 0.1, -0.1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_hqtel"]
+left_to_right = 1.0
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hqtel"]
+points = PackedVector3Array(0, 0, 0, -0.1, 0, 0, 0, 0.1, 0, -0.1, 0.1, 0)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dw050"]
+points = PackedVector3Array(0, 0, -0.1, 0, 0.1, -0.1, 0, 0, 0, 0, 0.1, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmdlo"]
 
@@ -223,7 +250,30 @@ shape = ExtResource("2_hqtel")
 [node name="LeftController" type="XRController3D" parent="XROrigin3D"]
 tracker = &"left_hand"
 
-[node name="mesh_Hand_Nails_low_L" type="MeshInstance3D" parent="XROrigin3D/LeftController"]
+[node name="GrabRegionL" type="ShapeCast3D" parent="XROrigin3D/LeftController"]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.96510327, 0.40889186, 0, -0.26186913, 1.506947, -0.031283833, -0.08789891, 0.15228808)
+shape = SubResource("ConvexPolygonShape3D_sweqy")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(0.38783112, 0.39172676, 0.8953888, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/LeftController/GrabRegionL"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.049734674, 0.050216354, -0.049915217)
+mesh = SubResource("PrismMesh_i3pqv")
+skeleton = NodePath("../..")
+
+[node name="Can_GrabRegion_L2" type="ShapeCast3D" parent="XROrigin3D/LeftController/GrabRegionL"]
+editor_description = "Consider Making this Collide rather than cancel the grab"
+shape = SubResource("ConvexPolygonShape3D_i3pqv")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(0.38783112, 0.39172676, 0.8953888, 1)
+
+[node name="Can_GrabRegion_L1" type="ShapeCast3D" parent="XROrigin3D/LeftController/GrabRegionL"]
+editor_description = "Consider Making this Collide rather than cancel the grab"
+shape = SubResource("ConvexPolygonShape3D_2hs0m")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(0.38783112, 0.39172676, 0.8953888, 1)
+
+[node name="FakeHand L" type="MeshInstance3D" parent="XROrigin3D/LeftController"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.031369403, -0.05, 0.15)
 mesh = SubResource("ArrayMesh_hqtel")
 skin = SubResource("Skin_sweqy")
@@ -233,7 +283,30 @@ surface_material_override/0 = ExtResource("3_i3pqv")
 [node name="RightController" type="XRController3D" parent="XROrigin3D"]
 tracker = &"right_hand"
 
-[node name="mesh_Hand_Nails_low_R" type="MeshInstance3D" parent="XROrigin3D/RightController"]
+[node name="GrabRegionR" type="ShapeCast3D" parent="XROrigin3D/RightController"]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.96510327, 0.40889186, 0, -0.26186913, 1.506947, 0.031, -0.087630495, 0.15296447)
+shape = SubResource("ConvexPolygonShape3D_1jxqw")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(0.38783112, 0.39172676, 0.8953888, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightController/GrabRegionR"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.049868602, 0.050216354, -0.049915217)
+mesh = SubResource("PrismMesh_hqtel")
+skeleton = NodePath("../..")
+
+[node name="Can_GrabRegion_R2" type="ShapeCast3D" parent="XROrigin3D/RightController/GrabRegionR"]
+editor_description = "Consider Making this Collide rather than cancel the grab"
+shape = SubResource("ConvexPolygonShape3D_hqtel")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(0.38783112, 0.39172676, 0.8953888, 1)
+
+[node name="Can_GrabRegion_R1" type="ShapeCast3D" parent="XROrigin3D/RightController/GrabRegionR"]
+editor_description = "Consider Making this Collide rather than cancel the grab"
+shape = SubResource("ConvexPolygonShape3D_dw050")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(0.38783112, 0.39172676, 0.8953888, 1)
+
+[node name="FakeHand R" type="MeshInstance3D" parent="XROrigin3D/RightController"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.031, -0.05, 0.15)
 mesh = SubResource("ArrayMesh_2hs0m")
 skin = SubResource("Skin_1jxqw")
@@ -241,6 +314,7 @@ surface_material_override/0 = ExtResource("3_i3pqv")
 
 [connection signal="button_pressed" from="XROrigin3D/LeftController" to="." method="_on_left_controller_button_pressed"]
 [connection signal="button_released" from="XROrigin3D/LeftController" to="." method="_on_left_controller_button_released"]
+[connection signal="input_float_changed" from="XROrigin3D/LeftController" to="." method="_on_left_controller_input_float_changed"]
 [connection signal="input_vector2_changed" from="XROrigin3D/LeftController" to="." method="_on_left_controller_input_vector_2_changed"]
 [connection signal="button_pressed" from="XROrigin3D/RightController" to="." method="_on_right_controller_button_pressed"]
 [connection signal="button_released" from="XROrigin3D/RightController" to="." method="_on_right_controller_button_released"]

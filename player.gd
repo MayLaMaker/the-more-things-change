@@ -1,56 +1,73 @@
 extends CharacterBody3D
 
+# --- Nodes ---
 @onready var headset: XRCamera3D = $XROrigin3D/XRCamera3D
-# LeftStick Movement
+@onready var left_hand: XRController3D = $XROrigin3D/LeftController
+@onready var right_hand: XRController3D = $XROrigin3D/RightController
+@onready var left_hand_grab_cast: ShapeCast3D = $XROrigin3D/LeftController/GrabRegionL
+@onready var right_hand_grab_cast: ShapeCast3D = $XROrigin3D/RightController/GrabRegionR
+@onready var left_L1: ShapeCast3D = $XROrigin3D/LeftController/GrabRegionL/Can_GrabRegion_L1
+@onready var left_L2: ShapeCast3D = $XROrigin3D/LeftController/GrabRegionL/Can_GrabRegion_L2
+@onready var right_L1: ShapeCast3D = $XROrigin3D/RightController/GrabRegionR/Can_GrabRegion_R1
+@onready var right_L2: ShapeCast3D = $XROrigin3D/RightController/GrabRegionR/Can_GrabRegion_R2
+
+# --- Movement ---
 @export var speed: float = 25.0
 @export var acceleration: float = 1.0
 var input_vector: Vector2 = Vector2.ZERO
 @export var gravity: float = 9.8
-@export var air_control: float = 0 # 0 = no control in air, 1 = full control
-# Grabbing
+@export var air_control: float = 0
+
+# --- Climbing ---
 var left_grabbing := false
 var right_grabbing := false
-@onready var left_hand: XRController3D = $XROrigin3D/LeftController
-@onready var right_hand: XRController3D = $XROrigin3D/RightController
 var left_prev_pos: Vector3
 var right_prev_pos: Vector3
 @export var can_climb: bool = true
 @export var climb_strength: float = 1.0
-# Both Hand Climbing
+var left_grip_strength := 1.0
+var right_grip_strength := 1.0
+
+# Both-hand climbing
 var both_hands_grabbing: bool = false
 var virtual_hand_start: Vector3 = Vector3.ZERO
 var virtual_hand_prev: Vector3 = Vector3.ZERO
 var virtual_hand_initialized: bool = false
 
-# Grab Functions
+# --- Grab Check ---
+func can_grab(hand_cast: ShapeCast3D, L1: ShapeCast3D, L2: ShapeCast3D) -> bool:
+	if not hand_cast or not hand_cast.is_colliding():
+		return false
+	if (L1 and L1.is_colliding()) or (L2 and L2.is_colliding()):
+		return false
+	return true
+
+# --- Grab Functions ---
 func _on_left_controller_button_pressed(name: String) -> void:
-	if name == "grip_click":
+	if name == "grip_click" and can_grab(left_hand_grab_cast, left_L1, left_L2):
 		left_grabbing = true
 		left_prev_pos = left_hand.global_transform.origin
-		print("Left grip pressed")
 
 func _on_left_controller_button_released(name: String) -> void:
 	if name == "grip_click":
 		left_grabbing = false
 		left_prev_pos = left_hand.global_transform.origin
-		print("Left grip released")
 
 func _on_right_controller_button_pressed(name: String) -> void:
-	if name == "grip_click":
+	if name == "grip_click" and can_grab(right_hand_grab_cast, right_L1, right_L2):
 		right_grabbing = true
 		right_prev_pos = right_hand.global_transform.origin
-		print("Right grip pressed")
 
 func _on_right_controller_button_released(name: String) -> void:
 	if name == "grip_click":
 		right_grabbing = false
 		right_prev_pos = right_hand.global_transform.origin
-		print("Right grip released")
 
-# Update stick input from signal
+# --- Movement ---
 func _on_left_controller_input_vector_2_changed(name: String, value: Vector2) -> void:
 	input_vector = value
 
+# --- Physics ---
 func _physics_process(delta: float) -> void:
 	# Determine if both hands are grabbing
 	both_hands_grabbing = left_grabbing and right_grabbing
@@ -61,7 +78,7 @@ func _physics_process(delta: float) -> void:
 		virtual_hand_prev = virtual_hand_start
 		virtual_hand_initialized = true
 
-	# Climbing logic
+	# --- Climbing Logic ---
 	if can_climb and (left_grabbing or right_grabbing):
 		var climb_force := Vector3.ZERO
 
@@ -84,7 +101,7 @@ func _physics_process(delta: float) -> void:
 	if not both_hands_grabbing:
 		virtual_hand_initialized = false
 
-	# Normal movement
+	# --- Normal Movement ---
 	var basis: Basis = headset.global_transform.basis
 	var forward: Vector3 = -basis.z
 	forward.y = 0
@@ -106,11 +123,16 @@ func _physics_process(delta: float) -> void:
 		velocity.x = lerp(velocity.x, target.x, acceleration * air_control * delta)
 		velocity.z = lerp(velocity.z, target.z, acceleration * air_control * delta)
 
-	# Apply gravity
-# Disable gravity while grabbing
+	# --- Gravity Toggle ---r
 	if left_grabbing or right_grabbing:
 		velocity.y -= 0.0
 	else:
 		velocity.y -= gravity * delta
 
 	move_and_slide()
+	
+	
+
+
+func _on_left_controller_input_float_changed(name: String, value: float) -> void:
+	pass # Replace with function body.
