@@ -281,6 +281,7 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_i3pqv")
 
 [node name="RightController" type="XRController3D" parent="XROrigin3D"]
+visible = false
 tracker = &"right_hand"
 
 [node name="GrabRegionR" type="ShapeCast3D" parent="XROrigin3D/RightController"]

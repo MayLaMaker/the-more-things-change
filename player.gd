@@ -37,6 +37,21 @@ var virtual_hand_start: Vector3 = Vector3.ZERO
 var virtual_hand_prev: Vector3 = Vector3.ZERO
 var virtual_hand_initialized: bool = false
 
+# --- Desktop XR Emulation ---
+@export var desktop_debug := false
+
+func enable_desktop_xr_emulation():
+	# Move headset with mouse
+	set_process(true)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _ready():
+	var xr := XRServer.get_primary_interface()
+	if xr == null or not xr.is_initialized():
+		desktop_debug = true
+		enable_desktop_xr_emulation()  # This drives headset & controller nodes and emits input signals
+
+
 # --- Grab Check ---
 func can_grab(hand_cast: ShapeCast3D, L1: ShapeCast3D, L2: ShapeCast3D) -> bool:
 	if not hand_cast or not hand_cast.is_colliding():
@@ -74,8 +89,17 @@ func _on_left_controller_input_vector_2_changed(name: String, value: Vector2) ->
 
 # --- Physics ---
 func _physics_process(delta: float) -> void:
-	# Determine if both hands are grabbing
+	# Track transition out of two-hand grab
+	var was_both := both_hands_grabbing
 	both_hands_grabbing = left_grabbing and right_grabbing
+
+	# Leaving two-hand grab → reset remaining hand
+	if was_both and not both_hands_grabbing:
+		if left_grabbing:
+			left_prev_pos = left_hand.global_transform.origin
+		if right_grabbing:
+			right_prev_pos = right_hand.global_transform.origin
+		virtual_hand_initialized = false
 
 	# Initialize virtual hand if both hands start grabbing
 	if both_hands_grabbing and not virtual_hand_initialized:
@@ -99,7 +123,6 @@ func _physics_process(delta: float) -> void:
 				climb_force += right_prev_pos - right_hand.global_transform.origin
 				right_prev_pos = right_hand.global_transform.origin
 
-		# Apply climbing force
 		velocity += (climb_force / delta) * climb_strength
 
 	# Reset virtual hand when not both grabbing
@@ -128,18 +151,13 @@ func _physics_process(delta: float) -> void:
 		velocity.x = lerp(velocity.x, target.x, acceleration * air_control * delta)
 		velocity.z = lerp(velocity.z, target.z, acceleration * air_control * delta)
 
-# --- Grab Sliding (smooth) ---
+	# --- Grab Sliding (smooth) ---
 	if left_grabbing or right_grabbing:
-		# Determine the strongest grip value between both hands
-		var target_grip = max(left_grip, right_grip) # strongest hand
-		# Smoothly interpolate current grip effect toward the target grip
-		grip_effect = lerp(grip_effect, target_grip, 0.1) # smooth transition
-		# Apply gravity scaled by grip effect and fall rate (1 = hold, 0 = full fall)
+		var target_grip = max(left_grip, right_grip)
+		grip_effect = lerp(grip_effect, target_grip, 0.1)
 		velocity.y -= gravity * (1.0 - grip_effect) * grip_sliderate * delta
 	else:
-		# Smoothly reset grip effect when hands are released
-		grip_effect = lerp(grip_effect, 0.0, 0.1) # smooth fall when released
-		# Apply full gravity scaled by fall rate
+		grip_effect = lerp(grip_effect, 0.0, 0.1)
 		velocity.y -= gravity * delta
 
 	move_and_slide()
