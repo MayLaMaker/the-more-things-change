@@ -1,8 +1,13 @@
-[gd_scene load_steps=18 format=4 uid="uid://byq66buv4im4p"]
+[gd_scene load_steps=20 format=4 uid="uid://byq66buv4im4p"]
 
 [ext_resource type="Script" uid="uid://b1bo0o1g27ylp" path="res://player.gd" id="1_i3pqv"]
 [ext_resource type="Shape3D" uid="uid://djq7hb0dxqkfd" path="res://addons/godot-xr-tools/hands/scenes/collision/hand_digit.shape" id="2_hqtel"]
 [ext_resource type="Material" uid="uid://dy6nhifvvmm73" path="res://addons/godot-xr-tools/hands/materials/caucasian_hand.tres" id="3_i3pqv"]
+[ext_resource type="PackedScene" uid="uid://bcpw73qhua6o0" path="res://Outside Godot/TMTC LARRY TEST.glb" id="4_hqtel"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_i3pqv"]
+radius = 0.1
+height = 0.2
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sweqy"]
 points = PackedVector3Array(0.1, 0, 0, 0.1, 0.1, 0, 0, 0, -0.1, 0, 0.1, -0.1, 0, 0, 0, 0, 0.1, 0)
@@ -239,6 +244,7 @@ bind/25/pose = Transform3D(1, 3.1237055e-06, -3.1385466e-06, -3.123643e-06, 1, 1
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_i3pqv")
+desktop_debug = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = ExtResource("2_hqtel")
@@ -246,6 +252,9 @@ shape = ExtResource("2_hqtel")
 [node name="XROrigin3D" type="XROrigin3D" parent="."]
 
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+
+[node name="FakeHead" type="MeshInstance3D" parent="XROrigin3D/XRCamera3D"]
+mesh = SubResource("SphereMesh_i3pqv")
 
 [node name="LeftController" type="XRController3D" parent="XROrigin3D"]
 tracker = &"left_hand"
@@ -281,7 +290,6 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_i3pqv")
 
 [node name="RightController" type="XRController3D" parent="XROrigin3D"]
-visible = false
 tracker = &"right_hand"
 
 [node name="GrabRegionR" type="ShapeCast3D" parent="XROrigin3D/RightController"]
@@ -312,6 +320,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.031, -0.05, 0.15)
 mesh = SubResource("ArrayMesh_2hs0m")
 skin = SubResource("Skin_1jxqw")
 surface_material_override/0 = ExtResource("3_i3pqv")
+
+[node name="Skeleton3D" type="Skeleton3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Skeleton3D"]
+
+[node name="TMTC LARRY TEST" parent="." instance=ExtResource("4_hqtel")]
+transform = Transform3D(-0.74, 0, 6.4692856e-08, 0, 0.74, 0, -6.4692856e-08, 0, -0.74, 0, 0, 0)
 
 [connection signal="button_pressed" from="XROrigin3D/LeftController" to="." method="_on_left_controller_button_pressed"]
 [connection signal="button_released" from="XROrigin3D/LeftController" to="." method="_on_left_controller_button_released"]

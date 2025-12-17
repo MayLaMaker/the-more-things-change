@@ -37,20 +37,35 @@ var virtual_hand_start: Vector3 = Vector3.ZERO
 var virtual_hand_prev: Vector3 = Vector3.ZERO
 var virtual_hand_initialized: bool = false
 
+# --- Head Bobbing ---
+@export var head_bob_enabled: bool = true
+@export var bob_amount: float = 0.01
+@export var bob_speed: float = 5.0
+var bob_time: float = 0.0
+var base_head_y: float = 0.0
+var head_offset: Vector3 = Vector3.ZERO
+
 # --- Desktop XR Emulation ---
 @export var desktop_debug := false
-
-func enable_desktop_xr_emulation():
-	# Move headset with mouse
-	set_process(true)
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+var mouse_delta := Vector2.ZERO
+var left_hand_speed := 2.0
+var right_hand_speed := 2.0
+var headset_speed := 2.0
+var rotation_speed := 0.002
 
 func _ready():
 	var xr := XRServer.get_primary_interface()
 	if xr == null or not xr.is_initialized():
 		desktop_debug = true
-		enable_desktop_xr_emulation()  # This drives headset & controller nodes and emits input signals
+		enable_desktop_xr_emulation()
 
+func enable_desktop_xr_emulation():
+	set_process(true)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _input(event):
+	if desktop_debug and event is InputEventMouseMotion:
+		mouse_delta = event.relative
 
 # --- Grab Check ---
 func can_grab(hand_cast: ShapeCast3D, L1: ShapeCast3D, L2: ShapeCast3D) -> bool:
@@ -65,7 +80,6 @@ func _on_left_controller_input_float_changed(name: String, value: float) -> void
 	if name == "grip":
 		left_grip = value
 		if value > 0.0 and not left_grabbing:
-			# Only check collision when starting grab
 			if can_grab(left_hand_grab_cast, left_L1, left_L2):
 				left_grabbing = true
 				left_prev_pos = left_hand.global_transform.origin
@@ -76,7 +90,6 @@ func _on_right_controller_input_float_changed(name: String, value: float) -> voi
 	if name == "grip":
 		right_grip = value
 		if value > 0.0 and not right_grabbing:
-			# Only check collision when starting grab
 			if can_grab(right_hand_grab_cast, right_L1, right_L2):
 				right_grabbing = true
 				right_prev_pos = right_hand.global_transform.origin
@@ -93,7 +106,6 @@ func _physics_process(delta: float) -> void:
 	var was_both := both_hands_grabbing
 	both_hands_grabbing = left_grabbing and right_grabbing
 
-	# Leaving two-hand grab → reset remaining hand
 	if was_both and not both_hands_grabbing:
 		if left_grabbing:
 			left_prev_pos = left_hand.global_transform.origin
@@ -101,7 +113,6 @@ func _physics_process(delta: float) -> void:
 			right_prev_pos = right_hand.global_transform.origin
 		virtual_hand_initialized = false
 
-	# Initialize virtual hand if both hands start grabbing
 	if both_hands_grabbing and not virtual_hand_initialized:
 		virtual_hand_start = (left_prev_pos + right_prev_pos) * 0.5
 		virtual_hand_prev = virtual_hand_start
@@ -125,7 +136,6 @@ func _physics_process(delta: float) -> void:
 
 		velocity += (climb_force / delta) * climb_strength
 
-	# Reset virtual hand when not both grabbing
 	if not both_hands_grabbing:
 		virtual_hand_initialized = false
 
@@ -161,3 +171,87 @@ func _physics_process(delta: float) -> void:
 		velocity.y -= gravity * delta
 
 	move_and_slide()
+
+# --- Desktop Input (non-VR) ---
+func _process(delta):
+	if not desktop_debug:
+		return
+
+	# --- Mouse look ---
+	rotate_y(-mouse_delta.x * rotation_speed)
+	headset.rotate_x(-mouse_delta.y * rotation_speed)
+	mouse_delta = Vector2.ZERO
+
+	# --- WASD movement ---
+	var move_vec := Vector2.ZERO
+	if Input.is_key_pressed(KEY_W):
+		move_vec.y += 1
+	if Input.is_key_pressed(KEY_S):
+		move_vec.y -= 1
+	if Input.is_key_pressed(KEY_D):
+		move_vec.x += 1
+	if Input.is_key_pressed(KEY_A):
+		move_vec.x -= 1
+	_on_left_controller_input_vector_2_changed("joystick", move_vec)
+
+	# --- Grip simulation ---
+	_on_left_controller_input_float_changed("grip", 1.0 if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) else 0.0)
+	_on_right_controller_input_float_changed("grip", 1.0 if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) else 0.0)
+
+	# --- Left hand movement (T/F/G/H/R/Y) ---
+	var left_delta := Vector3.ZERO
+	if Input.is_key_pressed(KEY_T):
+		left_delta.z -= left_hand_speed * delta
+	if Input.is_key_pressed(KEY_G):
+		left_delta.z += left_hand_speed * delta
+	if Input.is_key_pressed(KEY_F):
+		left_delta.x -= left_hand_speed * delta
+	if Input.is_key_pressed(KEY_H):
+		left_delta.x += left_hand_speed * delta
+	if Input.is_key_pressed(KEY_R):
+		left_delta.y += left_hand_speed * delta
+	if Input.is_key_pressed(KEY_Y):
+		left_delta.y -= left_hand_speed * delta
+	left_hand.translate(left_delta)
+
+	# --- Right hand movement (I/J/K/L/U/O) ---
+	var right_delta := Vector3.ZERO
+	if Input.is_key_pressed(KEY_I):
+		right_delta.z -= right_hand_speed * delta
+	if Input.is_key_pressed(KEY_K):
+		right_delta.z += right_hand_speed * delta
+	if Input.is_key_pressed(KEY_J):
+		right_delta.x -= right_hand_speed * delta
+	if Input.is_key_pressed(KEY_L):
+		right_delta.x += right_hand_speed * delta
+	if Input.is_key_pressed(KEY_U):
+		right_delta.y += right_hand_speed * delta
+	if Input.is_key_pressed(KEY_O):
+		right_delta.y -= right_hand_speed * delta
+	right_hand.translate(right_delta)
+
+	# --- Headset movement (Arrow keys + N/M) ---
+	var headset_delta := Vector3.ZERO
+	if Input.is_key_pressed(KEY_UP):
+		headset_delta.z -= headset_speed * delta
+	if Input.is_key_pressed(KEY_DOWN):
+		headset_delta.z += headset_speed * delta
+	if Input.is_key_pressed(KEY_LEFT):
+		headset_delta.x -= headset_speed * delta
+	if Input.is_key_pressed(KEY_RIGHT):
+		headset_delta.x += headset_speed * delta
+	if Input.is_key_pressed(KEY_N):
+		headset_delta.y += headset_speed * delta
+	if Input.is_key_pressed(KEY_M):
+		headset_delta.y -= headset_speed * delta
+	headset.translate(headset_delta)
+
+	# --- Head Bobbing applied to XROrigin3D ---
+	if head_bob_enabled and is_on_floor():
+		var horiz_speed := Vector3(velocity.x, 0, velocity.z).length()
+		if horiz_speed > 0.1:
+			bob_time += delta * horiz_speed * bob_speed
+		else:
+			bob_time = 0.0
+		var bob_offset := sin(bob_time) * bob_amount
+		$XROrigin3D.position.y = base_head_y + bob_offset + head_offset.y + headset_delta.y
