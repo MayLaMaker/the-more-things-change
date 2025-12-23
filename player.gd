@@ -10,13 +10,15 @@ extends CharacterBody3D
 @onready var left_L2: ShapeCast3D = $XROrigin3D/LeftController/GrabRegionL/Can_GrabRegion_L2
 @onready var right_L1: ShapeCast3D = $XROrigin3D/RightController/GrabRegionR/Can_GrabRegion_R1
 @onready var right_L2: ShapeCast3D = $XROrigin3D/RightController/GrabRegionR/Can_GrabRegion_R2
+@onready var skeleton: Skeleton3D = $"XROrigin3D/Female Test/Armature/Skeleton3D"
 
 # --- Movement ---
-@export var speed: float = 25.0
+@export var speed: float = 10.0
 @export var acceleration: float = 1.0
 var input_vector: Vector2 = Vector2.ZERO
 @export var gravity: float = 9.8
 @export var air_control: float = 0
+@export var head_bone_name: String = "Head"
 
 # --- Climbing ---
 var left_grabbing := false
@@ -57,9 +59,9 @@ func _ready():
 	var xr := XRServer.get_primary_interface()
 	if xr == null or not xr.is_initialized():
 		desktop_debug = true
-		enable_desktop_xr_emulation()
+		Desktop_Mode()
 
-func enable_desktop_xr_emulation():
+func Desktop_Mode():
 	set_process(true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -68,7 +70,7 @@ func _input(event):
 		mouse_delta = event.relative
 
 # --- Grab Check ---
-func can_grab(hand_cast: ShapeCast3D, L1: ShapeCast3D, L2: ShapeCast3D) -> bool:
+func Can_Grab(hand_cast: ShapeCast3D, L1: ShapeCast3D, L2: ShapeCast3D) -> bool:
 	if not hand_cast or not hand_cast.is_colliding():
 		return false
 	if (L1 and L1.is_colliding()) or (L2 and L2.is_colliding()):
@@ -76,28 +78,28 @@ func can_grab(hand_cast: ShapeCast3D, L1: ShapeCast3D, L2: ShapeCast3D) -> bool:
 	return true
 
 # --- Grab Functions (analog grip) ---
-func _on_left_controller_input_float_changed(name: String, value: float) -> void:
+func Grip_Strength_L(name: String, value: float) -> void:
 	if name == "grip":
 		left_grip = value
 		if value > 0.0 and not left_grabbing:
-			if can_grab(left_hand_grab_cast, left_L1, left_L2):
+			if Can_Grab(left_hand_grab_cast, left_L1, left_L2):
 				left_grabbing = true
 				left_prev_pos = left_hand.global_transform.origin
 		elif value <= 0.0:
 			left_grabbing = false
 
-func _on_right_controller_input_float_changed(name: String, value: float) -> void:
+func Grip_Strength_R(name: String, value: float) -> void:
 	if name == "grip":
 		right_grip = value
 		if value > 0.0 and not right_grabbing:
-			if can_grab(right_hand_grab_cast, right_L1, right_L2):
+			if Can_Grab(right_hand_grab_cast, right_L1, right_L2):
 				right_grabbing = true
 				right_prev_pos = right_hand.global_transform.origin
 		elif value <= 0.0:
 			right_grabbing = false
 
 # --- Movement Input ---
-func _on_left_controller_input_vector_2_changed(name: String, value: Vector2) -> void:
+func Stick_Value_L(name: String, value: Vector2) -> void:
 	input_vector = value
 
 # --- Physics ---
@@ -174,6 +176,15 @@ func _physics_process(delta: float) -> void:
 
 # --- Desktop Input (non-VR) ---
 func _process(delta):
+	
+# --- HMD Copies Headbone---
+	var head_transform: Transform3D = skeleton.get_bone_global_pose(skeleton.find_bone(head_bone_name))
+	head_transform.origin = headset.global_transform.origin
+	# Optionally match rotation
+	head_transform.basis = headset.global_transform.basis
+	skeleton.set_bone_global_pose_override(skeleton.find_bone(head_bone_name), head_transform, 1.0, true)
+	
+# --- Desktop Input (non-VR) ---
 	if not desktop_debug:
 		return
 
@@ -192,11 +203,11 @@ func _process(delta):
 		move_vec.x += 1
 	if Input.is_key_pressed(KEY_A):
 		move_vec.x -= 1
-	_on_left_controller_input_vector_2_changed("joystick", move_vec)
+	Stick_Value_L("joystick", move_vec)
 
 	# --- Grip simulation ---
-	_on_left_controller_input_float_changed("grip", 1.0 if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) else 0.0)
-	_on_right_controller_input_float_changed("grip", 1.0 if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) else 0.0)
+	Grip_Strength_L("grip", 1.0 if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) else 0.0)
+	Grip_Strength_R("grip", 1.0 if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) else 0.0)
 
 	# --- Left hand movement (T/F/G/H/R/Y) ---
 	var left_delta := Vector3.ZERO

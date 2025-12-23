@@ -8,17 +8,21 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
-config/name="The More Things Change (DEMO)"
+config/name="The More Things Change (DEMO) (G v4.6)"
 run/main_scene="uid://tktbv6he63n6"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
-XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
-XRToolsRumbleManager="*res://addons/godot-xr-tools/rumble/rumble_manager.gd"
+XRToolsUserSettings="*uid://6ya2jqlohtdj"
+XRToolsRumbleManager="*uid://33kk10s1m31n"
 
 [editor_plugins]
 
