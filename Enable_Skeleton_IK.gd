@@ -1,11 +1,8 @@
 extends SkeletonIK3D
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var left_hand_offset := Transform3D(Basis(Vector3(0,1,0), deg2rad(90)), Vector3.ZERO)
 	start()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

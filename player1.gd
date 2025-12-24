@@ -10,31 +10,30 @@ extends CharacterBody3D
 @onready var left_L2: ShapeCast3D = $XROrigin3D/LeftController/GrabRegionL/Can_GrabRegion_L2
 @onready var right_L1: ShapeCast3D = $XROrigin3D/RightController/GrabRegionR/Can_GrabRegion_R1
 @onready var right_L2: ShapeCast3D = $XROrigin3D/RightController/GrabRegionR/Can_GrabRegion_R2
-@onready var skeleton: Skeleton3D = $"XROrigin3D/Female Test/Armature/Skeleton3D"
 
 # --- Movement ---
-@export var speed: float = 10.0
+@export var speed: float = 25.0
 @export var acceleration: float = 1.0
 var input_vector: Vector2 = Vector2.ZERO
 @export var gravity: float = 9.8
 @export var air_control: float = 0
-@export var head_bone_name: String = "Head"
 
-# --- Climbing ---
+# --- Grabbing ---
 var left_grabbing := false
 var right_grabbing := false
+var grip_effect: float = 0.0
+@export var grip_sliderate: float = 10
+var left_grip: float = 0.0
+var right_grip: float = 0.0
+var both_hands_grabbing: bool = false
+
+# Climbing
 var left_prev_pos: Vector3
 var right_prev_pos: Vector3
 @export var can_climb: bool = true
 @export var climb_strength: float = 1.0
-var grip_effect: float = 0.0
-@export var grip_sliderate: float = 10
-
-var left_grip: float = 0.0
-var right_grip: float = 0.0
 
 # Both-hand climbing
-var both_hands_grabbing: bool = false
 var virtual_hand_start: Vector3 = Vector3.ZERO
 var virtual_hand_prev: Vector3 = Vector3.ZERO
 var virtual_hand_initialized: bool = false
@@ -59,9 +58,9 @@ func _ready():
 	var xr := XRServer.get_primary_interface()
 	if xr == null or not xr.is_initialized():
 		desktop_debug = true
-		Desktop_Mode()
+		enable_desktop_xr_emulation()
 
-func Desktop_Mode():
+func enable_desktop_xr_emulation():
 	set_process(true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -70,7 +69,7 @@ func _input(event):
 		mouse_delta = event.relative
 
 # --- Grab Check ---
-func Can_Grab(hand_cast: ShapeCast3D, L1: ShapeCast3D, L2: ShapeCast3D) -> bool:
+func can_grab(hand_cast: ShapeCast3D, L1: ShapeCast3D, L2: ShapeCast3D) -> bool:
 	if not hand_cast or not hand_cast.is_colliding():
 		return false
 	if (L1 and L1.is_colliding()) or (L2 and L2.is_colliding()):
@@ -82,7 +81,7 @@ func _on_left_controller_input_float_changed(name: String, value: float) -> void
 	if name == "grip":
 		left_grip = value
 		if value > 0.0 and not left_grabbing:
-			if Can_Grab(left_hand_grab_cast, left_L1, left_L2):
+			if can_grab(left_hand_grab_cast, left_L1, left_L2):
 				left_grabbing = true
 				left_prev_pos = left_hand.global_transform.origin
 		elif value <= 0.0:
@@ -92,14 +91,14 @@ func _on_right_controller_input_float_changed(name: String, value: float) -> voi
 	if name == "grip":
 		right_grip = value
 		if value > 0.0 and not right_grabbing:
-			if Can_Grab(right_hand_grab_cast, right_L1, right_L2):
+			if can_grab(right_hand_grab_cast, right_L1, right_L2):
 				right_grabbing = true
 				right_prev_pos = right_hand.global_transform.origin
 		elif value <= 0.0:
 			right_grabbing = false
 
 # --- Movement Input ---
-func _on_left_controller_input_vector_2_changed(name: String, value: Vector2) -> void:
+func Stick_L_Value(name: String, value: Vector2) -> void:
 	input_vector = value
 
 # --- Physics ---
@@ -172,34 +171,27 @@ func _physics_process(delta: float) -> void:
 		grip_effect = lerp(grip_effect, 0.0, 0.1)
 		velocity.y -= gravity * delta
 
+	# --- Apply forces to grabbed objects ---
+	if left_grabbing and left_hand_grab_cast.is_colliding():
+		var obj = left_hand_grab_cast.get_collider(0)
+		if obj and obj.has_method("apply_hand_force"):
+			var force_strength := 10.0
+			var force := (left_prev_pos - left_hand.global_transform.origin) * force_strength
+			obj.apply_hand_force(left_hand.global_transform.origin, force)
+			left_prev_pos = left_hand.global_transform.origin
+
+	if right_grabbing and right_hand_grab_cast.is_colliding():
+		var obj = right_hand_grab_cast.get_collider(0)
+		if obj and obj.has_method("apply_hand_force"):
+			var force_strength := 10.0
+			var force := (right_prev_pos - right_hand.global_transform.origin) * force_strength
+			obj.apply_hand_force(right_hand.global_transform.origin, force)
+			right_prev_pos = right_hand.global_transform.origin
+
 	move_and_slide()
-
-func _process(delta):
 	
-# --- Body Mesh Control ---
-
-# Head Rotation
-	var bone_id := skeleton.find_bone(head_bone_name)
-	var head_global := skeleton.get_bone_global_pose(bone_id)
-	var hmd_euler := headset.global_transform.basis.get_euler()
-	hmd_euler.x = -hmd_euler.x   # pitch
-	hmd_euler.z = -hmd_euler.z   # roll
-	head_global.basis = Basis.from_euler(hmd_euler)
-	skeleton.set_bone_global_pose_override(
-		bone_id,
-		head_global,
-		1.0,
-		true)
-		
-# Full Body Position
-	var hmd_pos: Vector3 = headset.global_transform.origin
-	var transform: Transform3D = $"XROrigin3D/Female Test/Armature".global_transform
-
-	transform.origin.x = hmd_pos.x
-	transform.origin.z = hmd_pos.z
-
-	$"XROrigin3D/Female Test/Armature".global_transform = transform
 # --- Desktop Input (non-VR) ---
+func _process(delta):
 	if not desktop_debug:
 		return
 
@@ -208,7 +200,7 @@ func _process(delta):
 	headset.rotate_x(-mouse_delta.y * rotation_speed)
 	mouse_delta = Vector2.ZERO
 
-	# --- WASD movement ---
+		# --- WASD ---
 	var move_vec := Vector2.ZERO
 	if Input.is_key_pressed(KEY_W):
 		move_vec.y += 1
@@ -218,7 +210,7 @@ func _process(delta):
 		move_vec.x += 1
 	if Input.is_key_pressed(KEY_A):
 		move_vec.x -= 1
-	_on_left_controller_input_vector_2_changed("joystick", move_vec)
+	Stick_L_Value("joystick", move_vec)
 
 	# --- Grip simulation ---
 	_on_left_controller_input_float_changed("grip", 1.0 if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) else 0.0)
@@ -250,9 +242,9 @@ func _process(delta):
 		right_delta.x -= right_hand_speed * delta
 	if Input.is_key_pressed(KEY_L):
 		right_delta.x += right_hand_speed * delta
-	if Input.is_key_pressed(KEY_U):
-		right_delta.y += right_hand_speed * delta
 	if Input.is_key_pressed(KEY_O):
+		right_delta.y += right_hand_speed * delta
+	if Input.is_key_pressed(KEY_U):
 		right_delta.y -= right_hand_speed * delta
 	right_hand.translate(right_delta)
 
