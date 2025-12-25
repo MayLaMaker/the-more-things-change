@@ -252,7 +252,6 @@ shape = ExtResource("2_hqtel")
 [node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=1275976141]
 
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D" unique_id=1741452328]
-visible = false
 current = true
 
 [node name="FakeHead" type="MeshInstance3D" parent="XROrigin3D/XRCamera3D" unique_id=1008671271]
@@ -292,6 +291,9 @@ skin = SubResource("Skin_sweqy")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_i3pqv")
 
+[node name="FullBodyHandPosition_L" type="Node3D" parent="XROrigin3D/LeftController" unique_id=521327588]
+transform = Transform3D(1.9106855e-15, 4.371139e-08, -1, 1, -4.371139e-08, 0, -4.371139e-08, -1, -4.371139e-08, -0.033096433, -0.05364382, 0.15150702)
+
 [node name="RightController" type="XRController3D" parent="XROrigin3D" unique_id=1297636471]
 tracker = &"right_hand"
 
@@ -324,6 +326,9 @@ mesh = SubResource("ArrayMesh_2hs0m")
 skin = SubResource("Skin_1jxqw")
 surface_material_override/0 = ExtResource("3_i3pqv")
 
+[node name="FullBodyHandPosition_R" type="Node3D" parent="XROrigin3D/RightController" unique_id=597231246]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0.033, -0.054, 0.152)
+
 [node name="Female Test" parent="XROrigin3D" unique_id=876063461 instance=ExtResource("5_sweqy")]
 transform = Transform3D(-0.9, 0, -1.3589622e-07, 0, 0.9, 0, 1.3589622e-07, 0, -0.9, 0, 0, 0)
 
@@ -332,7 +337,7 @@ root_bone = &"Left arm"
 tip_bone = &"Left wrist"
 use_magnet = true
 magnet = Vector3(0, 0, -10)
-target_node = NodePath("../../../../LeftController")
+target_node = NodePath("../../../../LeftController/FullBodyHandPosition_L")
 script = ExtResource("5_2hs0m")
 
 [node name="Hand_R_IK" type="SkeletonIK3D" parent="XROrigin3D/Female Test/Armature/Skeleton3D" parent_id_path=PackedInt32Array(876063461, 831689461) index="1" unique_id=1578074235]
@@ -340,7 +345,7 @@ root_bone = &"Right arm"
 tip_bone = &"Right wrist"
 use_magnet = true
 magnet = Vector3(0, 0, -10)
-target_node = NodePath("../../../../RightController")
+target_node = NodePath("../../../../RightController/FullBodyHandPosition_R")
 script = ExtResource("5_2hs0m")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="XROrigin3D/Female Test/Armature/Skeleton3D" parent_id_path=PackedInt32Array(876063461, 831689461) index="3" unique_id=1065833530]
