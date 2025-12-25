@@ -190,7 +190,36 @@ func _process(delta):
 		head_global,
 		1.0,
 		true)
-		
+# Spine rotation from hand positions (XZ → Yaw)
+	var spine_id := skeleton.find_bone("Spine")
+	if spine_id != -1:
+		var left_pos := left_hand.global_transform.origin
+		var right_pos := right_hand.global_transform.origin
+
+		# Hand direction (XZ)
+		var hand_dir := right_pos - left_pos
+		hand_dir.y = 0.0
+		if hand_dir.length() < 0.001:
+			return
+		hand_dir = hand_dir.normalized()
+
+		# Body forward (from headset)
+		var body_forward := -headset.global_transform.basis.z
+		body_forward.y = 0.0
+		body_forward = body_forward.normalized()
+
+		# Signed angle around Y
+		var yaw := body_forward.signed_angle_to(hand_dir, Vector3.UP) + PI * 0.5
+
+		# Apply to spine
+		var spine_pose := skeleton.get_bone_global_pose(spine_id)
+		spine_pose.basis = Basis(Vector3.UP, yaw)
+		skeleton.set_bone_global_pose_override(
+			spine_id,
+			spine_pose,
+			1.0,
+			true
+		)
 # Full Body Position
 	var hmd_pos: Vector3 = headset.global_transform.origin
 	var transform: Transform3D = $"XROrigin3D/Female Test/Armature".global_transform

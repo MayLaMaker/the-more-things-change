@@ -15,9 +15,10 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="The More Things Change (DEMO) (G v4.6)"
-run/main_scene="uid://tktbv6he63n6"
+run/main_scene="uid://h0trfgfqg5fm"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
+run/main_scene.mobile="uid://tktbv6he63n6"
 
 [autoload]
 
