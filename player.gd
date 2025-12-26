@@ -11,7 +11,7 @@ extends CharacterBody3D
 @onready var right_L1: ShapeCast3D = $XROrigin3D/RightController/GrabRegionR/Can_GrabRegion_R1
 @onready var right_L2: ShapeCast3D = $XROrigin3D/RightController/GrabRegionR/Can_GrabRegion_R2
 @onready var skeleton: Skeleton3D = $"XROrigin3D/Female Test/Armature/Skeleton3D"
-
+@onready var Body_Origin: Node3D = $"XROrigin3D/Female Test"
 # --- Movement ---
 @export var speed: float = 10.0
 @export var acceleration: float = 1.0
@@ -176,58 +176,6 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta):
 	
-# --- Body Mesh Control ---
-
-# Head Rotation
-	var bone_id := skeleton.find_bone(head_bone_name)
-	var head_global := skeleton.get_bone_global_pose(bone_id)
-	var hmd_euler := headset.global_transform.basis.get_euler()
-	hmd_euler.x = -hmd_euler.x   # pitch
-	hmd_euler.z = -hmd_euler.z   # roll
-	head_global.basis = Basis.from_euler(hmd_euler)
-	skeleton.set_bone_global_pose_override(
-		bone_id,
-		head_global,
-		1.0,
-		true)
-# Spine rotation from hand positions (XZ → Yaw)
-	var spine_id := skeleton.find_bone("Spine")
-	if spine_id != -1:
-		var left_pos := left_hand.global_transform.origin
-		var right_pos := right_hand.global_transform.origin
-
-		# Hand direction (XZ)
-		var hand_dir := right_pos - left_pos
-		hand_dir.y = 0.0
-		if hand_dir.length() < 0.001:
-			return
-		hand_dir = hand_dir.normalized()
-
-		# Body forward (from headset)
-		var body_forward := -headset.global_transform.basis.z
-		body_forward.y = 0.0
-		body_forward = body_forward.normalized()
-
-		# Signed angle around Y
-		var yaw := body_forward.signed_angle_to(hand_dir, Vector3.UP) + PI * 0.5
-
-		# Apply to spine
-		var spine_pose := skeleton.get_bone_global_pose(spine_id)
-		spine_pose.basis = Basis(Vector3.UP, yaw)
-		skeleton.set_bone_global_pose_override(
-			spine_id,
-			spine_pose,
-			1.0,
-			true
-		)
-# Full Body Position
-	var hmd_pos: Vector3 = headset.global_transform.origin
-	var transform: Transform3D = $"XROrigin3D/Female Test/Armature".global_transform
-
-	transform.origin.x = hmd_pos.x
-	transform.origin.z = hmd_pos.z
-
-	$"XROrigin3D/Female Test/Armature".global_transform = transform
 # --- Desktop Input (non-VR) ---
 	if not desktop_debug:
 		return
@@ -310,3 +258,57 @@ func _process(delta):
 			bob_time = 0.0
 		var bob_offset := sin(bob_time) * bob_amount
 		$XROrigin3D.position.y = base_head_y + bob_offset + head_offset.y + headset_delta.y
+
+# --- Body Mesh Control ---
+
+# Head Rotation
+	var bone_id := skeleton.find_bone(head_bone_name)
+	var head_global := skeleton.get_bone_global_pose(bone_id)
+	var hmd_euler := headset.global_transform.basis.get_euler()
+	hmd_euler.x = -hmd_euler.x   # pitch
+	hmd_euler.z = -hmd_euler.z   # roll
+	head_global.basis = Basis.from_euler(hmd_euler)
+	skeleton.set_bone_global_pose_override(
+		bone_id,
+		head_global,
+		1.0,
+		true)
+
+# Full Body Position
+	var hmd_pos: Vector3 = headset.global_transform.origin
+	var transform: Transform3D = $"XROrigin3D/Female Test/Armature".global_transform
+
+	transform.origin.x = hmd_pos.x
+	transform.origin.z = hmd_pos.z
+
+	$"XROrigin3D/Female Test/Armature".global_transform = transform
+
+# Spine rotation from hand positions (XZ → Yaw)
+	var spine_id := skeleton.find_bone("Spine")
+	if spine_id != -1:
+		var left_pos := left_hand.global_transform.origin
+		var right_pos := right_hand.global_transform.origin
+		var body_pos := Body_Origin.global_transform.origin
+		# Hand direction (XZ)
+		var hand_dir := right_pos - left_pos
+		hand_dir.y = 0.0
+		if hand_dir.length() < 0.001:
+			return
+		hand_dir = hand_dir.normalized()
+
+		# Body forward (from headset)
+		var body_forward := -headset.global_transform.basis.z
+		body_forward.y = 0.0
+		body_forward = body_forward.normalized()
+
+		# Signed angle around Y
+		var yaw := body_forward.signed_angle_to(hand_dir, Vector3.UP) + PI * 0.5
+
+		# Apply to spine
+		var spine_pose := skeleton.get_bone_global_pose(spine_id)
+		spine_pose.basis = Basis(Vector3.UP, yaw)
+		skeleton.set_bone_global_pose_override(
+			spine_id,
+			spine_pose,
+			1.0,
+			true)

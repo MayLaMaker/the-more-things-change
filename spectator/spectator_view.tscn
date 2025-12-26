@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://h0trfgfqg5fm"]
 
-[ext_resource type="PackedScene" path="res://objects/camera.tscn" id="1_0d0s6"]
+[ext_resource type="PackedScene" uid="uid://c8kvu7p33cba5" path="res://objects/camera.tscn" id="1_0d0s6"]
 [ext_resource type="Script" uid="uid://bxe85drefelti" path="res://spectator/spectator_view.gd" id="1_4vmdg"]
 [ext_resource type="PackedScene" uid="uid://tktbv6he63n6" path="res://main.tscn" id="1_7odkq"]
 [ext_resource type="Script" uid="uid://bvd7fc4teq1us" path="res://spectator/third_person_camera_3d.gd" id="2_4vmdg"]
@@ -12,7 +12,7 @@ anchors_preset = 0
 script = ExtResource("1_4vmdg")
 
 [node name="ThirdPersonCamera3D" type="Camera3D" parent="." unique_id=1926128059]
-transform = Transform3D(-0.999353, -7.69865e-09, 0.0359636, 0.0117169, 0.945439, 0.325588, -0.0340014, 0.325799, -0.944827, 0, 2, -3)
+transform = Transform3D(-0.99935305, -1.0416521e-08, 0.035963606, -0.0028423355, 0.99687195, -0.07898229, -0.035851113, -0.079033375, -0.9962271, 0, 1.325654, -3)
 cull_mask = 1048565
 current = true
 script = ExtResource("2_4vmdg")
