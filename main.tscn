@@ -127,9 +127,10 @@ shape = SubResource("BoxShape3D_0xm2m")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/CollisionShape3D" unique_id=776363594]
 mesh = SubResource("BoxMesh_h2yge")
 
-[node name="Climbing Test" type="Node" parent="." unique_id=1467457223]
+[node name="Climbing Test" type="Node3D" parent="." unique_id=205013273]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.1494553)
 
-[node name="Square Poles" type="Node" parent="Climbing Test" unique_id=799551419]
+[node name="Square Poles" type="Node3D" parent="Climbing Test" unique_id=1860587718]
 
 [node name="Square Pole 0,13m" type="StaticBody3D" parent="Climbing Test/Square Poles" unique_id=213583158]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36601007, 0, 0)
@@ -180,7 +181,7 @@ shape = SubResource("BoxShape3D_7mycd")
 mesh = SubResource("BoxMesh_272bh")
 skeleton = NodePath("../../../Square Pole 0,13m")
 
-[node name="Cylindrical Poles" type="Node" parent="Climbing Test" unique_id=821484059]
+[node name="Cylindrical Poles" type="Node3D" parent="Climbing Test" unique_id=1319259857]
 
 [node name="Cylindrical Pole 0,13m" type="StaticBody3D" parent="Climbing Test/Cylindrical Poles" unique_id=1864286348]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35854357, 0, 0.6585767)
@@ -234,8 +235,8 @@ mesh = SubResource("CylinderMesh_1bvp3")
 skeleton = NodePath("../..")
 
 [node name="Grab Physics Test Cube" type="RigidBody3D" parent="." unique_id=844190754]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5709944, 2.5959382)
-mass = 0.001
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8639069, -1.5238104)
+mass = 20000.0
 script = ExtResource("4_1bvp3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Grab Physics Test Cube" unique_id=863419111]

@@ -175,8 +175,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _process(delta):
-	
-# --- Desktop Input (non-VR) ---
+# --- Desktop Input (non-VR) (DELETE for VR TESTING) ---
 	if not desktop_debug:
 		return
 
@@ -227,13 +226,13 @@ func _process(delta):
 		right_delta.x -= right_hand_speed * delta
 	if Input.is_key_pressed(KEY_L):
 		right_delta.x += right_hand_speed * delta
-	if Input.is_key_pressed(KEY_U):
-		right_delta.y += right_hand_speed * delta
 	if Input.is_key_pressed(KEY_O):
+		right_delta.y += right_hand_speed * delta
+	if Input.is_key_pressed(KEY_U):
 		right_delta.y -= right_hand_speed * delta
 	right_hand.translate(right_delta)
 
-	# --- Headset movement (Arrow keys + N/M) ---
+	# --- Headset movement ---
 	var headset_delta := Vector3.ZERO
 	if Input.is_key_pressed(KEY_UP):
 		headset_delta.z -= headset_speed * delta
@@ -248,31 +247,8 @@ func _process(delta):
 	if Input.is_key_pressed(KEY_M):
 		headset_delta.y -= headset_speed * delta
 	headset.translate(headset_delta)
+	# --- (DELETE for VR TESTING) --- 
 
-	# --- Head Bobbing applied to XROrigin3D ---
-	if head_bob_enabled and is_on_floor():
-		var horiz_speed := Vector3(velocity.x, 0, velocity.z).length()
-		if horiz_speed > 0.1:
-			bob_time += delta * horiz_speed * bob_speed
-		else:
-			bob_time = 0.0
-		var bob_offset := sin(bob_time) * bob_amount
-		$XROrigin3D.position.y = base_head_y + bob_offset + head_offset.y + headset_delta.y
-
-# --- Body Mesh Control ---
-
-# Head Rotation
-	var bone_id := skeleton.find_bone(head_bone_name)
-	var head_global := skeleton.get_bone_global_pose(bone_id)
-	var hmd_euler := headset.global_transform.basis.get_euler()
-	hmd_euler.x = -hmd_euler.x   # pitch
-	hmd_euler.z = -hmd_euler.z   # roll
-	head_global.basis = Basis.from_euler(hmd_euler)
-	skeleton.set_bone_global_pose_override(
-		bone_id,
-		head_global,
-		1.0,
-		true)
 
 # Full Body Position
 	var hmd_pos: Vector3 = headset.global_transform.origin
