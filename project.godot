@@ -56,6 +56,10 @@ enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
 
 3d_physics/layer_2="PlayerBody"
 
+[physics]
+
+common/physics_ticks_per_second=120
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
