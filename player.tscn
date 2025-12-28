@@ -5,6 +5,10 @@
 [ext_resource type="Material" uid="uid://dy6nhifvvmm73" path="res://addons/godot-xr-tools/hands/materials/caucasian_hand.tres" id="3_i3pqv"]
 [ext_resource type="Script" uid="uid://bjs4cbp5dx1d3" path="res://Enable_Skeleton_IK.gd" id="5_2hs0m"]
 [ext_resource type="PackedScene" uid="uid://fbk6s4ho5rmb" path="res://Female_Test.glb" id="5_sweqy"]
+[ext_resource type="Script" uid="uid://34jvnjm4q6rl" path="res://generic_6dof_joint_3d.gd" id="6_2hs0m"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_op7ga"]
+radius = 0.2
 
 [sub_resource type="SphereMesh" id="SphereMesh_i3pqv"]
 radius = 0.1
@@ -291,6 +295,12 @@ height = 0.14450362
 radius = 0.040039063
 height = 0.094402224
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_sweqy"]
+size = Vector3(0.025, 0.1, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2hs0m"]
+size = Vector3(0.025, 0.1, 0.1)
+
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=1786869930]
 script = ExtResource("1_sweqy")
 
@@ -299,11 +309,24 @@ shape = ExtResource("2_hqtel")
 
 [node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=1275976141]
 
+[node name="Player Body RigidBody" type="RigidBody3D" parent="XROrigin3D" unique_id=612731361]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+mass = 4.0
+continuous_cd = true
+
+[node name="Body Collider" type="CollisionShape3D" parent="XROrigin3D/Player Body RigidBody" unique_id=1627665874]
+shape = SubResource("CapsuleShape3D_op7ga")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/Player Body RigidBody/Body Collider" unique_id=2046727276]
+
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D" unique_id=1741452328]
 current = true
 
 [node name="FakeHead" type="MeshInstance3D" parent="XROrigin3D/XRCamera3D" unique_id=1008671271]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+visible = false
 mesh = SubResource("SphereMesh_i3pqv")
 
 [node name="LeftController" type="XRController3D" parent="XROrigin3D" unique_id=1967633170]
@@ -410,9 +433,9 @@ transform = Transform3D(-1.1111112, -3.4046855e-14, 1.6777305e-07, -1.9646673e-1
 [node name="PhysicalBoneSimulator3D" type="PhysicalBoneSimulator3D" parent="XROrigin3D/Female Test/Armature/Skeleton3D" index="4" unique_id=878905638]
 
 [node name="Physical Bone Hips" type="PhysicalBone3D" parent="XROrigin3D/Female Test/Armature/Skeleton3D/PhysicalBoneSimulator3D" unique_id=56095414]
-transform = Transform3D(1.1111112, 2.649095e-07, -2.6645353e-14, 4.0114937e-08, -0.16825442, -1.0982981, -2.6185455e-07, 1.0982981, -0.16825442, -3.3923211e-10, 0.97432864, 0.0009682858)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.053046e-10, 2.1917753e-08, 0.07313866)
-body_offset = Transform3D(1.111111, -8.526513e-14, 0, -1.4210855e-14, 7.4505806e-08, -1.1111114, -2.842171e-14, 1.1111114, 7.4505806e-08, -3.392273e-10, 0.08126521, -2.9802322e-08)
+transform = Transform3D(1.1111112, 2.649095e-07, -2.6645353e-14, 4.0114937e-08, -0.16825442, -1.0982981, -2.6185455e-07, 1.0982981, -0.16825442, -1.0226712e-09, 0.97432864, 0.0009682858)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.203998e-10, 2.1917753e-08, 0.07313866)
+body_offset = Transform3D(1.111111, -8.526513e-14, 0, -1.4210855e-14, 7.4505806e-08, -1.1111114, -2.842171e-14, 1.1111114, 7.4505806e-08, -1.0226664e-09, 0.08126521, -2.9802322e-08)
 bone_name = "Hips"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="XROrigin3D/Female Test/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Hips" unique_id=64717532]
@@ -420,10 +443,10 @@ transform = Transform3D(1.5, 1.4210855e-13, -9.094947e-13, 0, -1.1920929e-07, 1.
 shape = SubResource("CapsuleShape3D_sweqy")
 
 [node name="Physical Bone Spine" type="PhysicalBone3D" parent="XROrigin3D/Female Test/Armature/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1914381072]
-transform = Transform3D(1.1111112, 2.649096e-07, -8.437695e-15, 7.433833e-09, -0.031179778, -1.1106735, -2.648053e-07, 1.1106735, -0.031179778, 5.7731597e-15, 1.1525137, 0.016021287)
+transform = Transform3D(1.1111112, 2.649096e-07, -7.5495166e-15, 7.433833e-09, -0.031179778, -1.1106735, -2.648053e-07, 1.1106735, -0.031179778, 5.7731597e-15, 1.1525137, 0.016021287)
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8346611e-16, 1.6763799e-09, 0.08810645)
-body_offset = Transform3D(1.1111112, -5.684342e-14, 1.15463195e-14, -1.7763568e-15, 0, -1.1111115, 0, 1.1111115, 0, -1.3322676e-15, 0.0978961, -1.8626451e-09)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2432372e-16, 1.6763799e-09, 0.08810645)
+body_offset = Transform3D(1.1111112, -5.684342e-14, 9.769963e-15, -1.7763568e-15, 0, -1.1111115, 0, 1.1111115, 0, -1.3322676e-15, 0.0978961, -1.8626451e-09)
 bone_name = "Spine"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -434,10 +457,10 @@ transform = Transform3D(1.5, -6.3948846e-14, -6.252776e-13, 3.8653525e-12, -2.04
 shape = SubResource("CapsuleShape3D_2hs0m")
 
 [node name="Physical Bone Chest" type="PhysicalBone3D" parent="XROrigin3D/Female Test/Armature/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1339271692]
-transform = Transform3D(1.1111112, -1.0231815e-12, -2.4868996e-14, 1.1447634e-13, 0.14971578, -1.1009783, 1.0231815e-12, 1.1009783, 0.14971578, 3.3910236e-10, 1.3577073, 0.0041721733)
+transform = Transform3D(1.1111112, -1.0231815e-12, -2.4868996e-14, 1.1447634e-13, 0.14971578, -1.1009783, 1.0231815e-12, 1.1009783, 0.14971578, 1.0225414e-09, 1.3577073, 0.0041721733)
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0518144e-10, 2.8504292e-07, 0.0974911)
-body_offset = Transform3D(1.111111, -2.6490073e-07, -2.2922109e-09, 0, 0.009614304, -1.1110697, 2.6491062e-07, 1.1110697, 0.009614304, 5.6263616e-10, 0.1083194, -0.00093762577)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.2027663e-10, 2.8504292e-07, 0.0974911)
+body_offset = Transform3D(1.111111, -2.6490073e-07, -2.2922109e-09, 0, 0.009614304, -1.1110697, 2.6491062e-07, 1.1110697, 0.009614304, 1.2460752e-09, 0.1083194, -0.00093762577)
 bone_name = "Chest"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -518,10 +541,10 @@ transform = Transform3D(1.4973854, 0.07169263, -0.052016698, 0.010772422, 0.7269
 shape = SubResource("CapsuleShape3D_ivps1")
 
 [node name="Physical Bone Right shoulder" type="PhysicalBone3D" parent="XROrigin3D/Female Test/Armature/Skeleton3D/PhysicalBoneSimulator3D" unique_id=1092502902]
-transform = Transform3D(0.13103493, -0.10626689, 1.0982283, -0.10626552, 1.0995891, 0.11907764, -1.0982283, -0.11907641, 0.119512856, -0.09213223, 1.4582068, -0.015005818)
+transform = Transform3D(0.13103493, -0.10626689, 1.0982282, -0.10626552, 1.0995891, 0.119077615, -1.0982283, -0.11907641, 0.11951285, -0.09213223, 1.4582068, -0.015005818)
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2789445e-07, 2.3313645e-07, 0.07870429)
-body_offset = Transform3D(1.1111112, -2.9802322e-08, 3.799796e-07, 3.501773e-07, 1.2088567e-06, -1.1111113, -4.4703484e-08, 1.1111115, 1.2526289e-06, -2.8312206e-07, 0.08744923, -3.5762787e-07)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2789446e-07, 2.3267467e-07, 0.07870428)
+body_offset = Transform3D(1.1111112, -2.9802322e-08, 3.799796e-07, 3.501773e-07, 1.2088567e-06, -1.1111114, -4.4703484e-08, 1.1111115, 1.2591481e-06, -2.8312206e-07, 0.08744923, -3.5762787e-07)
 bone_name = "Right shoulder"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -572,6 +595,39 @@ joint_constraints/impulse_clamp = 0.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="XROrigin3D/Female Test/Armature/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone Right wrist" unique_id=194344564]
 transform = Transform3D(1.4999986, 7.1071554e-08, -7.450581e-09, 5.289912e-07, 0.7272126, 1.3119302, 4.954636e-07, -1.311932, 0.72721285, -0.0042341948, 0.03162366, -0.017546892)
 shape = SubResource("CapsuleShape3D_u1c27")
+
+[node name="Left Hand Physics" type="RigidBody3D" parent="XROrigin3D" unique_id=783463087]
+mass = 500000000.0
+can_sleep = false
+continuous_cd = true
+script = ExtResource("6_2hs0m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="XROrigin3D/Left Hand Physics" unique_id=1873905295]
+shape = SubResource("BoxShape3D_sweqy")
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/Left Hand Physics/CollisionShape3D" unique_id=1096400796]
+mesh = SubResource("BoxMesh_2hs0m")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="XROrigin3D/Left Hand Physics" unique_id=1800996943]
+node_a = NodePath("..")
+node_b = NodePath("../../Player Body RigidBody")
+linear_spring_x/enabled = true
+linear_spring_x/stiffness = 5000.0
+linear_spring_x/damping = 50.0
+linear_spring_y/enabled = true
+linear_spring_y/stiffness = 5000.0
+linear_spring_y/damping = 50.0
+linear_spring_z/enabled = true
+linear_spring_z/stiffness = 5000.0
+linear_spring_z/damping = 50.0
+angular_spring_x/enabled = true
+angular_spring_x/stiffness = 5000.0
+angular_spring_x/damping = 50.0
+angular_spring_y/stiffness = 5000.0
+angular_spring_y/damping = 50.0
+angular_spring_z/stiffness = 5000.0
+angular_spring_z/damping = 50.0
 
 [connection signal="button_pressed" from="XROrigin3D/LeftController" to="." method="_on_left_controller_button_pressed"]
 [connection signal="button_released" from="XROrigin3D/LeftController" to="." method="_on_left_controller_button_released"]

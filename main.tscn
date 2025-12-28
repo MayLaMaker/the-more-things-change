@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://tktbv6he63n6"]
 
 [ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://byq66buv4im4p" path="res://player.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://cxkxoi0vgbscy" path="res://PlayerRoot.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://uxc80q35vh7l" path="res://ObjectGrabPhysics.gd" id="4_1bvp3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
@@ -116,9 +116,6 @@ shadow_enabled = true
 
 [node name="StartXR" parent="." unique_id=1911185701 instance=ExtResource("1_ig7tw")]
 
-[node name="Player" parent="." unique_id=566175625 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.099, 0, 0.096)
-
 [node name="Ground" type="StaticBody3D" parent="." unique_id=294575075]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=507517956]
@@ -128,7 +125,7 @@ shape = SubResource("BoxShape3D_0xm2m")
 mesh = SubResource("BoxMesh_h2yge")
 
 [node name="Climbing Test" type="Node3D" parent="." unique_id=205013273]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.1494553)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.2234528)
 
 [node name="Square Poles" type="Node3D" parent="Climbing Test" unique_id=1860587718]
 
@@ -234,8 +231,20 @@ shape = SubResource("CylinderShape3D_h2yge")
 mesh = SubResource("CylinderMesh_1bvp3")
 skeleton = NodePath("../..")
 
+[node name="Grab Physics Test Cube2" type="RigidBody3D" parent="." unique_id=476646403]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5776153, 5.7278137, -0.1433835)
+mass = 20000.0
+script = ExtResource("4_1bvp3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grab Physics Test Cube2" unique_id=306065120]
+shape = SubResource("BoxShape3D_5vw27")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Grab Physics Test Cube2/CollisionShape3D" unique_id=831229590]
+mesh = SubResource("BoxMesh_lquwl")
+skeleton = NodePath("../../../Grab Physics Test Cube2")
+
 [node name="Grab Physics Test Cube" type="RigidBody3D" parent="." unique_id=844190754]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8639069, -1.5238104)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8493793, 2.8639069, -1.440736)
 mass = 20000.0
 script = ExtResource("4_1bvp3")
 
@@ -245,3 +254,6 @@ shape = SubResource("BoxShape3D_5vw27")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Grab Physics Test Cube/CollisionShape3D" unique_id=6357353]
 mesh = SubResource("BoxMesh_lquwl")
 skeleton = NodePath("../..")
+
+[node name="PlayerRoot" parent="." unique_id=1128502710 instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17894566, 0)
