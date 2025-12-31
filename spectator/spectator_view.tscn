@@ -38,7 +38,6 @@ offset_bottom = 130.0
 
 [node name="FirstPersonViewport" type="SubViewport" parent="Frame/FirstPersonContainer" unique_id=487938356]
 handle_input_locally = false
-msaa_3d = 2
 size = Vector2i(200, 125)
 render_target_update_mode = 4
 
@@ -46,7 +45,7 @@ render_target_update_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 cull_mask = 1048569
 script = ExtResource("3_rs358")
-xr_camera = NodePath("../../../../HMD/Main/Player/XROrigin3D/XRCamera3D")
+xr_camera = NodePath("../../../../HMD/Main/PlayerRoot/CharacterBody/XROrigin3D/XRCamera3D")
 
 [node name="HMD" type="SubViewport" parent="." unique_id=147709644]
 msaa_3d = 2
@@ -54,5 +53,4 @@ msaa_3d = 2
 [node name="Main" parent="HMD" unique_id=947432712 instance=ExtResource("1_7odkq")]
 
 [editable path="HMD/Main"]
-[editable path="HMD/Main/Player"]
-[editable path="HMD/Main/Player/XROrigin3D/Female Test"]
+[editable path="HMD/Main/PlayerRoot"]
