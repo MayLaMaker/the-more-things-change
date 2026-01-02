@@ -2,8 +2,11 @@ extends Node3D
 
 var left_grip: float = 0.0
 var right_grip: float = 0.0
-var left_grabbing := false
-var right_grabbing := false
+var left_grabbing : bool = false
+var right_grabbing : bool = false
+var left_grabbed: RigidBody3D = null
+var right_grabbed: RigidBody3D = null
+
 
 @export var hand_force := 300.0
 @export var hand_torque := 6.0
@@ -30,6 +33,9 @@ func _physics_process(delta: float) -> void:
 	total_force += right_hand.update(hand_force, hand_torque)
 	body.apply_central_force(-total_force)
 
+	# Update grabs
+	_check_left_grab()
+	_check_right_grab()
 
 class HandPhysics:
 	var rb: RigidBody3D
@@ -67,3 +73,25 @@ func _on_right_controller_input_float_changed(name: String, value: float) -> voi
 				right_grabbing = true
 		elif value <= 0.0:
 			right_grabbing = false
+
+func _check_left_grab() -> void:
+	if left_grip <= 0.0:
+		left_grabbed = null
+		return
+
+	if $LeftHandPhysics/GrabRegionL.is_colliding():
+		var collider = $LeftHandPhysics/GrabRegionL.get_collider(0)
+		if collider is RigidBody3D and collider != left_hand.rb and collider != right_hand.rb:
+			left_grabbed = collider
+			print("Left grabbed:", left_grabbed.name)
+
+func _check_right_grab() -> void:
+	if right_grip <= 0.0:
+		right_grabbed = null
+		return
+
+	if $RightHandPhysics/GrabRegionR.is_colliding():
+		var collider = $RightHandPhysics/GrabRegionR.get_collider(0)
+		if collider is RigidBody3D and collider != left_hand.rb and collider != right_hand.rb:
+			right_grabbed = collider
+			print("Right grabbed:", right_grabbed.name)
