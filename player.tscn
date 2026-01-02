@@ -5,7 +5,7 @@
 [ext_resource type="Material" uid="uid://dy6nhifvvmm73" path="res://addons/godot-xr-tools/hands/materials/caucasian_hand.tres" id="3_i3pqv"]
 [ext_resource type="Script" uid="uid://bjs4cbp5dx1d3" path="res://Enable_Skeleton_IK.gd" id="5_2hs0m"]
 [ext_resource type="PackedScene" uid="uid://fbk6s4ho5rmb" path="res://Female_Test.glb" id="5_sweqy"]
-[ext_resource type="Script" uid="uid://34jvnjm4q6rl" path="res://generic_6dof_joint_3d.gd" id="6_2hs0m"]
+[ext_resource type="Script" uid="uid://34jvnjm4q6rl" path="res://PlayerRoot.gd" id="6_2hs0m"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_op7ga"]
 radius = 0.2

@@ -232,7 +232,7 @@ mesh = SubResource("CylinderMesh_1bvp3")
 skeleton = NodePath("../..")
 
 [node name="Grab Physics Test Cube2" type="RigidBody3D" parent="." unique_id=476646403]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5776153, 5.7278137, -0.1433835)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1752551, 0.5744394, 0.19368562)
 mass = 20000.0
 script = ExtResource("4_1bvp3")
 
@@ -244,7 +244,7 @@ mesh = SubResource("BoxMesh_lquwl")
 skeleton = NodePath("../../../Grab Physics Test Cube2")
 
 [node name="Grab Physics Test Cube" type="RigidBody3D" parent="." unique_id=844190754]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28997064, 2.8639069, 0.18618321)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0967896, 0.58406377, 0.18618321)
 mass = 4.0
 script = ExtResource("4_1bvp3")
 
