@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cxkxoi0vgbscy"]
 
 [ext_resource type="Script" uid="uid://34jvnjm4q6rl" path="res://PlayerRoot.gd" id="2_rebjx"]
+[ext_resource type="Script" uid="uid://uxc80q35vh7l" path="res://ObjectGrabPhysics.gd" id="2_rwfw0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kylym"]
 radius = 0.09277344
@@ -40,6 +41,12 @@ points = PackedVector3Array(0, 0, 0, -0.1, 0, 0, 0, 0.1, 0, -0.1, 0.1, 0)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qiemt"]
 points = PackedVector3Array(0, 0, -0.1, 0, 0.1, -0.1, 0, 0, 0, 0, 0.1, 0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5tqhk"]
+size = Vector3(0.25, 0.25, 0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_swpol"]
+size = Vector3(0.25, 0.25, 0.25)
 
 [node name="PlayerRoot" type="Node3D" unique_id=1128502710]
 script = ExtResource("2_rebjx")
@@ -146,6 +153,22 @@ editor_description = "Consider Making this Collide rather than cancel the grab"
 shape = SubResource("ConvexPolygonShape3D_qiemt")
 target_position = Vector3(0, 0, 0)
 debug_shape_custom_color = Color(0.38783112, 0.39172676, 0.8953888, 1)
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="RightHandPhysics" unique_id=927761425]
+node_a = NodePath("..")
+node_b = NodePath("../../Grab Physics Test Cube")
+
+[node name="Grab Physics Test Cube" type="RigidBody3D" parent="." unique_id=1442779864]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.339667, -0.009738147, 0.0023261607)
+mass = 2000.0
+script = ExtResource("2_rwfw0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Grab Physics Test Cube" unique_id=1486779751]
+shape = SubResource("BoxShape3D_5tqhk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Grab Physics Test Cube/CollisionShape3D" unique_id=660954958]
+mesh = SubResource("BoxMesh_swpol")
+skeleton = NodePath("../..")
 
 [connection signal="input_float_changed" from="CharacterBody/XROrigin3D/LeftController" to="." method="_on_left_controller_input_float_changed"]
 [connection signal="input_float_changed" from="CharacterBody/XROrigin3D/LeftController" to="CharacterBody" method="_on_left_controller_input_float_changed"]
