@@ -11,6 +11,13 @@ var right_grabbed: RigidBody3D = null
 @export var hand_force := 300.0
 @export var hand_torque := 6.0
 
+@export var height_min := 0.5
+@export var height_max := 2
+
+@onready var headset: XRCamera3D = $CharacterBody/XROrigin3D/XRCamera3D
+@onready var collision_shape_node: CollisionShape3D = $CharacterBody/CollisionShape3D
+@onready var capsule_shape: CapsuleShape3D = collision_shape_node.shape as CapsuleShape3D
+
 @onready var left_joint: Generic6DOFJoint3D = $"LeftHandPhysics/6DOFLeft"
 @onready var right_joint: Generic6DOFJoint3D = $"RightHandPhysics/6DOFRight"
 @onready var body: RigidBody3D = $CharacterBody
@@ -53,6 +60,19 @@ func _physics_process(delta: float) -> void:
 		right_joint.node_a = NodePath()
 		right_joint.node_b = NodePath()
 
+	if headset == null or collision_shape_node.shape == null:
+		return
+
+	var capsule_shape := collision_shape_node.shape as CapsuleShape3D
+
+	# Adjust capsule height using new names
+	var hmd_y := headset.transform.origin.y
+	capsule_shape.height = clamp(hmd_y, height_min, height_max)
+
+	# Move collision shape to follow HMD
+	var new_pos := Vector3(headset.transform.origin.x, capsule_shape.height / 2.0, headset.transform.origin.z)
+	collision_shape_node.position = new_pos
+	
 class HandPhysics:
 	var rb: RigidBody3D
 	var target: Node3D

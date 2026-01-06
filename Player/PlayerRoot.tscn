@@ -48,12 +48,32 @@ script = ExtResource("2_rebjx")
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
+mass = 4.0
 contact_monitor = true
 max_contacts_reported = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody" unique_id=1757023024]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.86902165, 0)
 shape = SubResource("CapsuleShape3D_kylym")
+
+[node name="SherryGodotModel" parent="CharacterBody/CollisionShape3D" unique_id=178548286 instance=ExtResource("3_mqcsf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.86902165, 0)
+
+[node name="Hand_L_IK" type="SkeletonIK3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Armature/Skeleton3D" parent_id_path=PackedInt32Array(178548286, 418266273) index="0" unique_id=298801943]
+root_bone = &"Left arm"
+tip_bone = &"Left wrist"
+use_magnet = true
+magnet = Vector3(0, 0, 10)
+target_node = NodePath("../../../../../XROrigin3D/LeftController/FullBodyHandPosition_L")
+script = ExtResource("3_p31nf")
+
+[node name="Hand_R_IK" type="SkeletonIK3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Armature/Skeleton3D" parent_id_path=PackedInt32Array(178548286, 418266273) index="1" unique_id=1352898790]
+root_bone = &"Right arm"
+tip_bone = &"Right wrist"
+use_magnet = true
+magnet = Vector3(0, 0, 10)
+target_node = NodePath("../../../../../XROrigin3D/RightController/FullBodyHandPosition_R")
+script = ExtResource("3_p31nf")
 
 [node name="XROrigin3D" type="XROrigin3D" parent="CharacterBody" unique_id=1330478284]
 
@@ -71,24 +91,6 @@ tracker = &"right_hand"
 
 [node name="FullBodyHandPosition_R" type="Node3D" parent="CharacterBody/XROrigin3D/RightController" unique_id=1201365244]
 transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0.033, -0.054, 0.152)
-
-[node name="SherryGodotModel" parent="CharacterBody" unique_id=178548286 instance=ExtResource("3_mqcsf")]
-
-[node name="Hand_L_IK" type="SkeletonIK3D" parent="CharacterBody/SherryGodotModel/Armature/Skeleton3D" parent_id_path=PackedInt32Array(178548286, 418266273) index="0" unique_id=298801943]
-root_bone = &"Left arm"
-tip_bone = &"Left wrist"
-use_magnet = true
-magnet = Vector3(0, 0, 10)
-target_node = NodePath("../../../../XROrigin3D/LeftController/FullBodyHandPosition_L")
-script = ExtResource("3_p31nf")
-
-[node name="Hand_R_IK" type="SkeletonIK3D" parent="CharacterBody/SherryGodotModel/Armature/Skeleton3D" parent_id_path=PackedInt32Array(178548286, 418266273) index="1" unique_id=1352898790]
-root_bone = &"Right arm"
-tip_bone = &"Right wrist"
-use_magnet = true
-magnet = Vector3(0, 0, 10)
-target_node = NodePath("../../../../XROrigin3D/RightController/FullBodyHandPosition_R")
-script = ExtResource("3_p31nf")
 
 [node name="LeftHandPhysics" type="RigidBody3D" parent="." unique_id=755410316]
 mass = 0.2
@@ -176,4 +178,4 @@ node_a = NodePath("..")
 [connection signal="input_float_changed" from="CharacterBody/XROrigin3D/RightController" to="." method="_on_right_controller_input_float_changed"]
 [connection signal="input_float_changed" from="CharacterBody/XROrigin3D/RightController" to="CharacterBody" method="_on_right_controller_input_float_changed"]
 
-[editable path="CharacterBody/SherryGodotModel"]
+[editable path="CharacterBody/CollisionShape3D/SherryGodotModel"]
