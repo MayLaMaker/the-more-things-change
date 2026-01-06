@@ -1,0 +1,164 @@
+[gd_scene format=3 uid="uid://cxkxoi0vgbscy"]
+
+[ext_resource type="Script" uid="uid://34jvnjm4q6rl" path="res://Player/PlayerRoot.gd" id="2_rebjx"]
+[ext_resource type="PackedScene" uid="uid://dbxpilbospngo" path="res://Mesh/SherryGodotModel.blend" id="3_mqcsf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kylym"]
+radius = 0.09277344
+height = 1.6584473
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rwfw0"]
+radius = 0.09
+
+[sub_resource type="BoxMesh" id="BoxMesh_rwfw0"]
+size = Vector3(0.025, 0.1, 0.1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kylym"]
+points = PackedVector3Array(0.1, 0, 0, 0.1, 0.1, 0, 0, 0, -0.1, 0, 0.1, -0.1, 0, 0, 0, 0, 0.1, 0)
+
+[sub_resource type="PrismMesh" id="PrismMesh_rwfw0"]
+lightmap_size_hint = Vector2i(14, 21)
+left_to_right = 0.0
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5tqhk"]
+points = PackedVector3Array(0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.1, 0.1, 0)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_swpol"]
+points = PackedVector3Array(0, 0, -0.1, 0, 0.1, -0.1, 0, 0, 0, 0, 0.1, 0)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rebjx"]
+points = PackedVector3Array(0, 0, 0, 0, 0.1, 0, -0.1, 0, 0, -0.1, 0.1, 0, 0, 0, -0.1, 0, 0.1, -0.1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_bvwfn"]
+left_to_right = 1.0
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_64nim"]
+points = PackedVector3Array(0, 0, 0, -0.1, 0, 0, 0, 0.1, 0, -0.1, 0.1, 0)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qiemt"]
+points = PackedVector3Array(0, 0, -0.1, 0, 0.1, -0.1, 0, 0, 0, 0, 0.1, 0)
+
+[node name="PlayerRoot" type="Node3D" unique_id=1128502710]
+script = ExtResource("2_rebjx")
+hand_force = null
+hand_torque = null
+
+[node name="CharacterBody" type="RigidBody3D" parent="." unique_id=1899563998]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+contact_monitor = true
+max_contacts_reported = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody" unique_id=1757023024]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.86902165, 0)
+shape = SubResource("CapsuleShape3D_kylym")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="CharacterBody" unique_id=1330478284]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="CharacterBody/XROrigin3D" unique_id=1548881246]
+current = true
+
+[node name="LeftController" type="XRController3D" parent="CharacterBody/XROrigin3D" unique_id=2035900792]
+tracker = &"left_hand"
+
+[node name="FullBodyHandPosition_L" type="Node3D" parent="CharacterBody/XROrigin3D/LeftController" unique_id=1940434629]
+transform = Transform3D(1.9106855e-15, 4.371139e-08, -1, 1, -4.371139e-08, 0, -4.371139e-08, -1, -4.371139e-08, -0.033096433, -0.05364382, 0.15150702)
+
+[node name="RightController" type="XRController3D" parent="CharacterBody/XROrigin3D" unique_id=1003675073]
+tracker = &"right_hand"
+
+[node name="FullBodyHandPosition_R" type="Node3D" parent="CharacterBody/XROrigin3D/RightController" unique_id=1201365244]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0.033, -0.054, 0.152)
+
+[node name="SherryGodotModel" parent="CharacterBody" unique_id=178548286 instance=ExtResource("3_mqcsf")]
+
+[node name="LeftHandPhysics" type="RigidBody3D" parent="." unique_id=755410316]
+mass = 0.2
+gravity_scale = 0.0
+max_contacts_reported = 4
+linear_damp = 50.0
+angular_damp = 50.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeftHandPhysics" unique_id=1258083166]
+transform = Transform3D(-4.371139e-08, -1, 4.371139e-08, 0, -4.371139e-08, -1, 1, -4.371139e-08, 1.9106855e-15, 0, 0, 0)
+shape = SubResource("SphereShape3D_rwfw0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LeftHandPhysics/CollisionShape3D" unique_id=1893255377]
+mesh = SubResource("BoxMesh_rwfw0")
+
+[node name="GrabRegionL" type="ShapeCast3D" parent="LeftHandPhysics" unique_id=1570292561]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -0.049991824, 0.05046997, -0.013080396)
+shape = SubResource("ConvexPolygonShape3D_kylym")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(0.38783112, 0.39172676, 0.8953888, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LeftHandPhysics/GrabRegionL" unique_id=1152397928]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.049734674, 0.050216354, -0.049915217)
+mesh = SubResource("PrismMesh_rwfw0")
+skeleton = NodePath("../..")
+
+[node name="Can_GrabRegion_L2" type="ShapeCast3D" parent="LeftHandPhysics/GrabRegionL" unique_id=2044963087]
+editor_description = "Consider Making this Collide rather than cancel the grab"
+shape = SubResource("ConvexPolygonShape3D_5tqhk")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(0.38783112, 0.39172676, 0.8953888, 1)
+
+[node name="Can_GrabRegion_L1" type="ShapeCast3D" parent="LeftHandPhysics/GrabRegionL" unique_id=295090444]
+editor_description = "Consider Making this Collide rather than cancel the grab"
+shape = SubResource("ConvexPolygonShape3D_swpol")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(0.38783112, 0.39172676, 0.8953888, 1)
+
+[node name="6DOFLeft" type="Generic6DOFJoint3D" parent="LeftHandPhysics" unique_id=192529383]
+node_a = NodePath("..")
+
+[node name="RightHandPhysics" type="RigidBody3D" parent="." unique_id=2130468815]
+mass = 0.2
+gravity_scale = 0.0
+max_contacts_reported = 4
+linear_damp = 50.0
+angular_damp = 50.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RightHandPhysics" unique_id=1569818425]
+transform = Transform3D(-4.371139e-08, -1, 0, -4.371139e-08, 1.9106855e-15, -1, 1, -4.371139e-08, -4.371139e-08, 0, 0, 0)
+shape = SubResource("SphereShape3D_rwfw0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RightHandPhysics/CollisionShape3D" unique_id=2014146620]
+mesh = SubResource("BoxMesh_rwfw0")
+
+[node name="GrabRegionR" type="ShapeCast3D" parent="RightHandPhysics" unique_id=483067975]
+transform = Transform3D(-8.954771e-08, 0.9999844, -0.0055850414, 2.4945667e-08, 0.005585042, 0.99998426, 1.0000001, 8.9406974e-08, -2.54454e-08, -0.049432375, 0.047028437, -0.016088579)
+shape = SubResource("ConvexPolygonShape3D_rebjx")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(0.38783112, 0.39172676, 0.8953888, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RightHandPhysics/GrabRegionR" unique_id=163084018]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -0.049868602, 0.050216354, -0.049915217)
+mesh = SubResource("PrismMesh_bvwfn")
+skeleton = NodePath("../..")
+
+[node name="Can_GrabRegion_R2" type="ShapeCast3D" parent="RightHandPhysics/GrabRegionR" unique_id=285400869]
+editor_description = "Consider Making this Collide rather than cancel the grab"
+shape = SubResource("ConvexPolygonShape3D_64nim")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(0.38783112, 0.39172676, 0.8953888, 1)
+
+[node name="Can_GrabRegion_R1" type="ShapeCast3D" parent="RightHandPhysics/GrabRegionR" unique_id=737204763]
+editor_description = "Consider Making this Collide rather than cancel the grab"
+shape = SubResource("ConvexPolygonShape3D_qiemt")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(0.38783112, 0.39172676, 0.8953888, 1)
+
+[node name="6DOFRight" type="Generic6DOFJoint3D" parent="RightHandPhysics" unique_id=927761425]
+node_a = NodePath("..")
+
+[connection signal="input_float_changed" from="CharacterBody/XROrigin3D/LeftController" to="." method="_on_left_controller_input_float_changed"]
+[connection signal="input_float_changed" from="CharacterBody/XROrigin3D/LeftController" to="CharacterBody" method="_on_left_controller_input_float_changed"]
+[connection signal="input_vector2_changed" from="CharacterBody/XROrigin3D/LeftController" to="CharacterBody" method="_on_left_controller_input_vector_2_changed"]
+[connection signal="input_float_changed" from="CharacterBody/XROrigin3D/RightController" to="." method="_on_right_controller_input_float_changed"]
+[connection signal="input_float_changed" from="CharacterBody/XROrigin3D/RightController" to="CharacterBody" method="_on_right_controller_input_float_changed"]
+
+[editable path="CharacterBody/SherryGodotModel"]
