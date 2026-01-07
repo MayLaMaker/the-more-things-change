@@ -7,6 +7,12 @@ var right_grabbing : bool = false
 var left_grabbed: RigidBody3D = null
 var right_grabbed: RigidBody3D = null
 
+var mouse_delta: Vector2 = Vector2.ZERO
+
+@export var rotation_speed := 20
+@export var headset_speed := 3 
+@export var hand_speed := 3
+@export var desktop_debug := true
 
 @export var hand_force := 300.0
 @export var hand_torque := 6.0
@@ -110,6 +116,9 @@ func _on_right_controller_input_float_changed(name: String, value: float) -> voi
 		elif value <= 0.0:
 			right_grabbing = false
 
+func _on_left_controller_input_vector_2_changed(name: String, value: Vector2) -> void:
+	pass # Replace with function body.
+
 func _check_left_grab() -> void:
 	if left_grip <= 0.0:
 		left_grabbed = null
@@ -131,3 +140,60 @@ func _check_right_grab() -> void:
 		if collider is RigidBody3D and collider != left_hand.rb and collider != right_hand.rb:
 			right_grabbed = collider
 			print("Right grabbed:", right_grabbed.name)
+
+func _process(delta: float) -> void:
+	if not desktop_debug:
+		return
+
+	# --- Mouse look (HMD rotation) --- (Doesn't work, likely due to Spec. Cam)
+	rotate_y(-mouse_delta.x * rotation_speed)
+	headset.rotate_x(-mouse_delta.y * rotation_speed)
+	mouse_delta = Vector2.ZERO
+
+	# --- Fake joystick input ---
+	var move_vec := Vector2.ZERO
+	if Input.is_key_pressed(KEY_W): move_vec.y += 1.0
+	if Input.is_key_pressed(KEY_S): move_vec.y -= 1.0
+	if Input.is_key_pressed(KEY_D): move_vec.x += 1.0
+	if Input.is_key_pressed(KEY_A): move_vec.x -= 1.0
+
+	_on_left_controller_input_vector_2_changed("joystick", move_vec.normalized())
+
+	# --- Fake grip input ---
+	_on_left_controller_input_float_changed(
+		"grip",
+		1.0 if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) else 0.0
+	)
+	_on_right_controller_input_float_changed(
+		"grip",
+		1.0 if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) else 0.0
+	)
+	# --- Headset ---
+	var headset_delta := Vector3.ZERO
+	if Input.is_key_pressed(KEY_UP): headset_delta.z -= headset_speed * delta
+	if Input.is_key_pressed(KEY_DOWN): headset_delta.z += headset_speed * delta
+	if Input.is_key_pressed(KEY_LEFT): headset_delta.x -= headset_speed * delta
+	if Input.is_key_pressed(KEY_RIGHT): headset_delta.x += headset_speed * delta
+	if Input.is_key_pressed(KEY_N): headset_delta.y += headset_speed * delta
+	if Input.is_key_pressed(KEY_M): headset_delta.y -= headset_speed * delta
+	headset.translate(headset_delta)
+	
+	# --- Left hand --- (Keys Will break later, change keys if so) 
+	var left_delta := Vector3.ZERO
+	if Input.is_key_pressed(KEY_H): left_delta.z -= hand_speed * delta  # forward (-Z)
+	if Input.is_key_pressed(KEY_F): left_delta.z += hand_speed * delta  # backward (+Z)
+	if Input.is_key_pressed(KEY_Y): left_delta.x -= hand_speed * delta  # left (-X)
+	if Input.is_key_pressed(KEY_R): left_delta.x += hand_speed * delta  # right (+X)
+	if Input.is_key_pressed(KEY_T): left_delta.y += hand_speed * delta  # up (+Y)
+	if Input.is_key_pressed(KEY_G): left_delta.y -= hand_speed * delta  # down (-Y)
+	left_hand.target.translate(left_delta)
+
+	# --- Right hand ---
+	var right_delta := Vector3.ZERO
+	if Input.is_key_pressed(KEY_J): right_delta.z -= hand_speed * delta  # forward (-Z)
+	if Input.is_key_pressed(KEY_L): right_delta.z += hand_speed * delta  # backward (+Z)
+	if Input.is_key_pressed(KEY_O): right_delta.x -= hand_speed * delta  # left (-X)
+	if Input.is_key_pressed(KEY_U): right_delta.x += hand_speed * delta  # right (+X)
+	if Input.is_key_pressed(KEY_I): right_delta.y += hand_speed * delta  # up (+Y)
+	if Input.is_key_pressed(KEY_K): right_delta.y -= hand_speed * delta  # down (-Y)
+	right_hand.target.translate(right_delta)
