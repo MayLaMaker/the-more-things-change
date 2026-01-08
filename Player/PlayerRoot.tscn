@@ -34,6 +34,7 @@ points = PackedVector3Array(0, 0, -0.1, 0, 0.1, -0.1, 0, 0, 0, 0, 0.1, 0)
 
 [node name="PlayerRoot" type="Node3D" unique_id=1128502710]
 script = ExtResource("2_rebjx")
+desktop_debug = false
 
 [node name="CharacterBody" type="RigidBody3D" parent="." unique_id=1899563998]
 axis_lock_angular_x = true
@@ -47,10 +48,10 @@ max_contacts_reported = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.86902165, 0)
 shape = SubResource("CapsuleShape3D_kylym")
 
-[node name="SherryGodotModel" parent="CharacterBody/CollisionShape3D" unique_id=178548286 instance=ExtResource("3_mqcsf")]
+[node name="SherryGodotModel" parent="CharacterBody/CollisionShape3D" unique_id=1458028970 instance=ExtResource("3_mqcsf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.86902165, 0)
 
-[node name="Hand_L_IK" type="SkeletonIK3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Armature/Skeleton3D" parent_id_path=PackedInt32Array(178548286, 418266273) index="0" unique_id=298801943]
+[node name="Hand_L_IK" type="SkeletonIK3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1458028970, 144523509) index="0" unique_id=298801943]
 root_bone = &"Left arm"
 tip_bone = &"Left wrist"
 use_magnet = true
@@ -58,7 +59,7 @@ magnet = Vector3(0, 0, 10)
 target_node = NodePath("../../../../../XROrigin3D/LeftController/FullBodyHandPosition_L")
 script = ExtResource("3_p31nf")
 
-[node name="Hand_R_IK" type="SkeletonIK3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Armature/Skeleton3D" parent_id_path=PackedInt32Array(178548286, 418266273) index="1" unique_id=1352898790]
+[node name="Hand_R_IK" type="SkeletonIK3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1458028970, 144523509) index="1" unique_id=1352898790]
 root_bone = &"Right arm"
 tip_bone = &"Right wrist"
 use_magnet = true
@@ -86,7 +87,7 @@ show_when_tracked = true
 transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, 0.033, -0.054, 0.152)
 
 [node name="LeftHandPhysics" type="RigidBody3D" parent="." unique_id=755410316]
-transform = Transform3D(0.88675934, 0.46153, 0.025453722, 0.019756028, 0.017173653, -0.99965733, -0.46180895, 0.88695836, 0.0061108996, 0.755, 0.83, 0.325)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mass = 0.2
 gravity_scale = 0.0
 max_contacts_reported = 4

@@ -20,6 +20,8 @@ var mouse_delta: Vector2 = Vector2.ZERO
 @export var height_min := 0.5
 @export var height_max := 2
 
+@onready var skeleton: Skeleton3D = $CharacterBody/CollisionShape3D/SherryGodotModel/Armature/Skeleton3D
+
 @onready var headset: XRCamera3D = $CharacterBody/XROrigin3D/XRCamera3D
 @onready var collision_shape_node: CollisionShape3D = $CharacterBody/CollisionShape3D
 @onready var capsule_shape: CapsuleShape3D = collision_shape_node.shape as CapsuleShape3D
@@ -142,9 +144,52 @@ func _check_right_grab() -> void:
 			print("Right grabbed:", right_grabbed.name)
 
 func _process(delta: float) -> void:
-	if not desktop_debug:
+	# --- Spine rotation from hand positions (XZ → Yaw) ---
+	var spine_id := skeleton.find_bone("Spine")
+	if spine_id == -1:
 		return
 
+	var left_pos := left_hand.target.global_transform.origin
+	var right_pos := right_hand.target.global_transform.origin
+
+	# Hand direction (XZ only)
+	var hand_dir := right_pos - left_pos
+	hand_dir.y = 0.0
+	if hand_dir.length() < 0.001:
+		return
+	hand_dir = hand_dir.normalized()
+
+	# Body forward (from headset)
+	var body_forward := skeleton.global_transform.basis.z
+	body_forward.y = 0.0
+	body_forward = body_forward.normalized()
+
+	# Signed yaw angle
+	var yaw := body_forward.signed_angle_to(hand_dir, Vector3.UP) + PI * 0.5
+
+	# Apply to spine
+	var spine_pose := skeleton.get_bone_global_pose(spine_id)
+	spine_pose.basis = Basis(Vector3.UP, yaw)
+
+	skeleton.set_bone_global_pose_override(
+		spine_id,
+		spine_pose,
+		1.0,
+		true
+	)
+	
+	# --- Head rotation (HMD) ---
+	var head_id = skeleton.find_bone("Head")
+	if head_id != -1:
+		var hmd_pose = skeleton.get_bone_global_pose(head_id)
+		hmd_pose.basis = Basis(Vector3.UP, PI) * headset.global_transform.basis  # FIX: rotate 180 degrees
+		var correction = Basis(Vector3.UP, PI)  # model 180° offset
+		hmd_pose.basis = headset.global_transform.basis * correction
+		skeleton.set_bone_global_pose_override(head_id, hmd_pose, 1.0, true)
+		
+	# --- Desktop Debug ---
+	if not desktop_debug:
+		return
 	# --- Mouse look (HMD rotation) --- (Doesn't work, likely due to Spec. Cam)
 	rotate_y(-mouse_delta.x * rotation_speed)
 	headset.rotate_x(-mouse_delta.y * rotation_speed)
