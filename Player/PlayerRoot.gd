@@ -20,7 +20,7 @@ var mouse_delta: Vector2 = Vector2.ZERO
 @export var height_min := 0.5
 @export var height_max := 2
 
-@onready var skeleton: Skeleton3D = $CharacterBody/CollisionShape3D/SherryGodotModel/Armature/Skeleton3D
+@onready var skeleton: Skeleton3D = $CharacterBody/CollisionShape3D/SherryGodotModel/Pose/Armature/Skeleton3D
 
 @onready var headset: XRCamera3D = $CharacterBody/XROrigin3D/XRCamera3D
 @onready var collision_shape_node: CollisionShape3D = $CharacterBody/CollisionShape3D
