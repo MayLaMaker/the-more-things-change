@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://cxkxoi0vgbscy" path="res://Player/PlayerRoot.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://uxc80q35vh7l" path="res://ObjectGrabPhysics.gd" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://c835cn65cr2hg" path="res://character.tscn" id="4_lquwl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -125,7 +126,7 @@ shape = SubResource("BoxShape3D_0xm2m")
 mesh = SubResource("BoxMesh_h2yge")
 
 [node name="Climbing Test" type="Node3D" parent="." unique_id=205013273]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.2234528)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.321926)
 
 [node name="Square Poles" type="Node3D" parent="Climbing Test" unique_id=1860587718]
 
@@ -232,7 +233,7 @@ mesh = SubResource("CylinderMesh_1bvp3")
 skeleton = NodePath("../..")
 
 [node name="Grab Physics Test Cube2" type="RigidBody3D" parent="." unique_id=476646403]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1752551, 0.5744394, 0.19368562)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1752551, 0.5744394, 1.7620506)
 mass = 20000.0
 script = ExtResource("4_1bvp3")
 
@@ -244,7 +245,7 @@ mesh = SubResource("BoxMesh_lquwl")
 skeleton = NodePath("../../../Grab Physics Test Cube2")
 
 [node name="Grab Physics Test Cube" type="RigidBody3D" parent="." unique_id=844190754]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0967896, 0.58406377, 0.18618321)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0967896, 0.58406377, 2.3832352)
 mass = 4.0
 script = ExtResource("4_1bvp3")
 
@@ -257,3 +258,6 @@ skeleton = NodePath("../..")
 
 [node name="PlayerRoot" parent="." unique_id=1128502710 instance=ExtResource("3_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17894566, 0)
+
+[node name="Character" parent="." unique_id=1735264460 instance=ExtResource("4_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1749103, 1.7490046, -0.6280707)
