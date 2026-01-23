@@ -26,6 +26,10 @@ run/main_scene.mobile="uid://tktbv6he63n6"
 XRToolsUserSettings="*uid://6ya2jqlohtdj"
 XRToolsRumbleManager="*uid://33kk10s1m31n"
 
+[display]
+
+window/size/mode=3
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg")
