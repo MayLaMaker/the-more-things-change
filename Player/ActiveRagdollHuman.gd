@@ -1,9 +1,5 @@
 extends Node3D
 
-# movement/walking/jumping stuff
-const SPEED = 50
-const DAMPING = 0.9
-
 # spring stuff
 @export var angular_spring_stiffness: float = 4000.0
 @export var angular_spring_damping: float = 80.0

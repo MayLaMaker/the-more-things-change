@@ -260,4 +260,4 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17894566, 0)
 
 [node name="Character" parent="." unique_id=1735264460 instance=ExtResource("4_lquwl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1749103, 1.7490046, -0.6280707)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1749103, 0.06528938, -0.6280707)
