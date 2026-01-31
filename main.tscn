@@ -233,7 +233,7 @@ mesh = SubResource("CylinderMesh_1bvp3")
 skeleton = NodePath("../..")
 
 [node name="Grab Physics Test Cube2" type="RigidBody3D" parent="." unique_id=476646403]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1291242, 3.1287327, -0.72406125)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7492999, 3.1287327, 2.3273818)
 mass = 100.0
 script = ExtResource("4_1bvp3")
 
