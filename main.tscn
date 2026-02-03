@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://tktbv6he63n6"]
 
 [ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://cxkxoi0vgbscy" path="res://Player/PlayerRoot.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://cxkxoi0vgbscy" path="res://Golden Trio/Player/PlayerRoot.tscn" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://uxc80q35vh7l" path="res://ObjectGrabPhysics.gd" id="4_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://c835cn65cr2hg" path="res://character.tscn" id="4_lquwl"]
+[ext_resource type="PackedScene" uid="uid://c835cn65cr2hg" path="res://Golden Trio/Character/character.tscn" id="4_lquwl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
 sky_top_color = Color(0, 0, 0, 1)
