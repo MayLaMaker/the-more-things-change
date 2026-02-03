@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cyyi7if4uax0q"]
 
-[ext_resource type="Material" uid="uid://6o2hblvsynhx" path="res://materials/shiny_black_material.tres" id="1_b3nd2"]
+[ext_resource type="Material" uid="uid://6o2hblvsynhx" path="res://Assets/materials/shiny_black_material.tres" id="1_b3nd2"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_gqmld"]
 size = Vector3(0.1, 0.1, 0.1)

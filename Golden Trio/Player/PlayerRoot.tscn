@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cxkxoi0vgbscy"]
 
 [ext_resource type="Script" uid="uid://34jvnjm4q6rl" path="res://Golden Trio/Player/PlayerRoot.gd" id="2_rebjx"]
-[ext_resource type="PackedScene" uid="uid://dbxpilbospngo" path="res://Mesh/SherryGodotModel.blend" id="3_mqcsf"]
+[ext_resource type="PackedScene" uid="uid://dbxpilbospngo" path="res://Assets/Mesh/SherryGodotModel.blend" id="3_mqcsf"]
 [ext_resource type="Script" uid="uid://bjs4cbp5dx1d3" path="res://Golden Trio/Character/Enable_Skeleton_IK.gd" id="3_p31nf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vbank"]
@@ -206,9 +206,9 @@ shape = SubResource("CapsuleShape3D_vbank")
 [node name="SherryGodotModel" type="Node3D" parent="CharacterBody/CollisionShape3D" unique_id=295315918]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2220978, -0.869, 0)
 
-[node name="Pose" parent="CharacterBody/CollisionShape3D/SherryGodotModel" unique_id=713802132 instance=ExtResource("3_mqcsf")]
+[node name="Pose" parent="CharacterBody/CollisionShape3D/SherryGodotModel" unique_id=320930103 instance=ExtResource("3_mqcsf")]
 
-[node name="Hand_L_IK" type="SkeletonIK3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Pose/Armature/Skeleton3D" parent_id_path=PackedInt32Array(713802132, 1134196980) index="0" unique_id=298801943]
+[node name="Hand_L_IK" type="SkeletonIK3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Pose/Armature/Skeleton3D" parent_id_path=PackedInt32Array(320930103, 1733367552) index="0" unique_id=298801943]
 root_bone = &"Left arm"
 tip_bone = &"Left wrist"
 use_magnet = true
@@ -216,7 +216,7 @@ magnet = Vector3(0, 0, 10)
 target_node = NodePath("../../../../../../XROrigin3D/LeftController/FullBodyHandPosition_L")
 script = ExtResource("3_p31nf")
 
-[node name="Hand_R_IK" type="SkeletonIK3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Pose/Armature/Skeleton3D" parent_id_path=PackedInt32Array(713802132, 1134196980) index="1" unique_id=1352898790]
+[node name="Hand_R_IK" type="SkeletonIK3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Pose/Armature/Skeleton3D" parent_id_path=PackedInt32Array(320930103, 1733367552) index="1" unique_id=1352898790]
 root_bone = &"Right arm"
 tip_bone = &"Right wrist"
 use_magnet = true
@@ -224,7 +224,7 @@ magnet = Vector3(0, 0, 10)
 target_node = NodePath("../../../../../../XROrigin3D/RightController/FullBodyHandPosition_R")
 script = ExtResource("3_p31nf")
 
-[node name="Foot_L_IK" type="SkeletonIK3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Pose/Armature/Skeleton3D" parent_id_path=PackedInt32Array(713802132, 1134196980) index="2" unique_id=918189357]
+[node name="Foot_L_IK" type="SkeletonIK3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Pose/Armature/Skeleton3D" parent_id_path=PackedInt32Array(320930103, 1733367552) index="2" unique_id=918189357]
 root_bone = &"Left leg"
 tip_bone = &"Left ankle"
 use_magnet = true
@@ -232,7 +232,7 @@ magnet = Vector3(0, 0, -10)
 target_node = NodePath("../../../../../../XROrigin3D/FullBodyFootPosition_L")
 script = ExtResource("3_p31nf")
 
-[node name="Foot_R_IK" type="SkeletonIK3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Pose/Armature/Skeleton3D" parent_id_path=PackedInt32Array(713802132, 1134196980) index="3" unique_id=1411314993]
+[node name="Foot_R_IK" type="SkeletonIK3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Pose/Armature/Skeleton3D" parent_id_path=PackedInt32Array(320930103, 1733367552) index="3" unique_id=1411314993]
 root_bone = &"Right leg"
 tip_bone = &"Right ankle"
 use_magnet = true
@@ -240,12 +240,12 @@ magnet = Vector3(0, 0, -10)
 target_node = NodePath("../../../../../../XROrigin3D/FullBodyFootPosition_R")
 script = ExtResource("3_p31nf")
 
-[node name="Sherry" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Pose/Armature/Skeleton3D" parent_id_path=PackedInt32Array(713802132, 1134196980) index="4" unique_id=1310957912]
+[node name="Sherry" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Pose/Armature/Skeleton3D" parent_id_path=PackedInt32Array(320930103, 1733367552) index="4" unique_id=1650180576]
 visible = false
 
-[node name="Ragdoll" parent="CharacterBody/CollisionShape3D/SherryGodotModel" unique_id=987254810 instance=ExtResource("3_mqcsf")]
+[node name="Ragdoll" parent="CharacterBody/CollisionShape3D/SherryGodotModel" unique_id=1626320784 instance=ExtResource("3_mqcsf")]
 
-[node name="Physical Bone Hips" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="1" unique_id=1240308216]
+[node name="Physical Bone Hips" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="1" unique_id=1240308216]
 transform = Transform3D(-1, -6.291619e-07, -1.7377724e-08, 1.1303201e-07, -0.15235692, -0.9883256, 6.191691e-07, -0.98832554, 0.15235694, 0, 0.9128562, -0.0011298275)
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.921899e-13, 3.943407e-08, 0.07561073)
 body_offset = Transform3D(1, -2.3874236e-12, 5.186962e-12, 5.1798565e-12, -5.364418e-07, -1.0000004, 2.444267e-12, 1, -5.2154064e-07, 0, 0.07561076, 0)
@@ -255,7 +255,7 @@ bone_name = "Hips"
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_mqcsf")
 
-[node name="Physical Bone Spine" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="2" unique_id=697768517]
+[node name="Physical Bone Spine" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="2" unique_id=697768517]
 transform = Transform3D(-1, -6.3772825e-07, 1.0200505e-08, 9.768357e-09, -0.031304654, -0.99950993, 6.3773496e-07, -0.9995099, 0.031304657, 0, 1.0679646, -0.015168068)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6722553e-14, -9.5289283e-07, 0.08041976)
@@ -269,7 +269,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_p31nf")
 
-[node name="Physical Bone Chest" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="3" unique_id=1635491739]
+[node name="Physical Bone Chest" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="3" unique_id=1635491739]
 transform = Transform3D(1, 2.1920926e-07, 5.7499348e-09, 4.6899203e-08, -0.18818548, -0.9821335, -2.142107e-07, 0.9821335, -0.18818548, 0, 1.2559154, 0.0029265247)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.397121e-10, 3.0445517e-07, 0.10952749)
@@ -283,7 +283,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_62e7a")
 
-[node name="Physical Bone Neck" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="4" unique_id=1475456640]
+[node name="Physical Bone Neck" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="4" unique_id=1475456640]
 transform = Transform3D(-1, -4.9469304e-07, 1.04850855e-07, -1.06864164e-07, 0.0040715784, -0.9999918, 4.9426205e-07, -0.9999917, -0.0040715784, 0, 1.4109113, 0.023731543)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0745326e-15, 6.829889e-08, 0.047425617)
@@ -297,11 +297,11 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_shv6r")
 
-[node name="Physical Bone Head" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="5" unique_id=220929479]
-transform = Transform3D(0.88622344, 0.3012205, 0.3519577, -1.5747762e-08, 0.7597444, -0.6502218, -0.46325803, 0.57624185, 0.6733033, -0.022816181, 1.4996288, -0.019704763)
+[node name="Physical Bone Head" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="5" unique_id=220929479]
+transform = Transform3D(0.88636607, 0.3009971, 0.35178968, -1.5736212e-08, 0.75982934, -0.65012264, -0.46298513, 0.5762466, 0.6734869, -0.022816181, 1.4996288, -0.019704763)
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0205433e-05, -5.679205e-06, 0.064805694)
-body_offset = Transform3D(-0.8862236, -0.30122027, -0.35195747, -1.030287e-13, 0.7597444, -0.6502218, 0.4632577, -0.5762419, -0.6733035, 0.022816181, 0.04214239, 0.0436259)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5367364e-05, -1.414679e-05, 0.06480569)
+body_offset = Transform3D(-0.88636625, -0.3009969, -0.3517894, 2.1689317e-12, 0.75982934, -0.65012264, 0.4629848, -0.5762467, -0.67348707, 0.022816181, 0.04214239, 0.0436259)
 bone_name = "Head"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -311,7 +311,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_atsex")
 
-[node name="Physical Bone Left shoulder" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="6" unique_id=614346155]
+[node name="Physical Bone Left shoulder" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="6" unique_id=614346155]
 transform = Transform3D(-0.12383438, 0.033680625, 0.9917312, 0.0965409, 0.99509156, -0.02173999, -0.98759556, 0.09305045, -0.12647812, -0.07279706, 1.3332627, 0.013735487)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.750324e-05, -3.0595278e-05, 0.068138584)
@@ -325,7 +325,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_27mt6")
 
-[node name="Physical Bone Left arm" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="7" unique_id=702062890]
+[node name="Physical Bone Left arm" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="7" unique_id=702062890]
 transform = Transform3D(-0.092438556, 0.0130862575, 0.9956324, 0.014358909, 0.99982715, -0.011808254, -0.9956148, 0.0132046575, -0.09261049, -0.2656268, 1.3361909, 0.034018647)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1085857e-06, 6.90827e-06, 0.12577306)
@@ -339,7 +339,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_iodul")
 
-[node name="Physical Bone Left elbow" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="8" unique_id=293595123]
+[node name="Physical Bone Left elbow" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="8" unique_id=293595123]
 transform = Transform3D(0.038462844, 0.018516406, 0.99908847, 0.09303535, 0.99541914, -0.022030069, -0.9949196, 0.09379789, 0.036563966, -0.48442686, 1.3398423, 0.04224389)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0918293e-06, -9.540316e-05, 0.09368646)
@@ -353,7 +353,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_4ha6k")
 
-[node name="Physical Bone Left wrist" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="9" unique_id=1406826601]
+[node name="Physical Bone Left wrist" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="9" unique_id=1406826601]
 transform = Transform3D(-0.12202132, -0.37742043, 0.9179677, 0.9850309, -0.15950929, 0.06535382, 0.12175851, 0.9122009, 0.39123428, -0.62018263, 1.3387942, 0.020781564)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.591696e-07, 1.241342e-07, 0.046105042)
@@ -367,11 +367,11 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_y0uqk")
 
-[node name="Physical Bone IndexFinger1_L" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="10" unique_id=324791967]
-transform = Transform3D(-0.0017653054, 0.0170885, 0.9998525, -0.10266957, 0.99456716, -0.017179443, -0.994714, -0.102684736, -1.2457717e-06, -0.6851896, 1.3361726, 0.0027579784)
+[node name="Physical Bone IndexFinger1_L" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="10" unique_id=324791967]
+transform = Transform3D(-0.0017688602, 0.0170885, 0.9998525, -0.10266951, 0.99456716, -0.017179808, -0.994714, -0.102684736, -4.782195e-06, -0.6851896, 1.3361726, 0.0027579784)
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4408904e-05, -6.456485e-07, 0.02268743)
-body_offset = Transform3D(1.0000002, -5.5879354e-07, 1.9930972e-06, 1.980724e-06, -8.407304e-06, -1.0000002, 6.92904e-07, 1.0000004, -8.322946e-06, -1.4454126e-05, 0.022687435, 8.34465e-07)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.432824e-05, -6.4564733e-07, 0.02268743)
+body_offset = Transform3D(1.0000002, -5.5879354e-07, 5.5485434e-06, 5.536048e-06, -8.407304e-06, -1.0000002, 6.92904e-07, 1.0000004, -8.322999e-06, -1.4454126e-05, 0.022687435, 8.34465e-07)
 bone_name = "IndexFinger1_L"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -381,11 +381,11 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_vmyy6")
 
-[node name="Physical Bone IndexFinger2_L" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="11" unique_id=363988010]
-transform = Transform3D(-2.0860476e-08, 9.901762e-07, 1, 0.052061323, 0.9986439, -9.877474e-07, -0.9986439, 0.052061323, -7.238207e-08, -0.7213806, 1.3367298, 0.0027674742)
+[node name="Physical Bone IndexFinger2_L" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="11" unique_id=363988010]
+transform = Transform3D(-2.0942544e-08, 9.901762e-07, 1, 0.052061323, 0.9986439, -9.877431e-07, -0.9986439, 0.052061323, -7.2464026e-08, -0.7213806, 1.3367298, 0.0027674742)
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5092955e-05, -0.00016771296, 0.013311384)
-body_offset = Transform3D(1.0000002, 2.8312206e-07, 1.4757649e-07, 1.1888223e-07, -1.1727155e-06, -1.0000001, -1.1920929e-07, 1.0000002, -1.0863108e-06, -1.5094876e-05, 0.013311386, 0.00016772747)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.50929545e-05, -0.00016771296, 0.013311384)
+body_offset = Transform3D(1.0000002, 2.8312206e-07, 1.4765854e-07, 1.18964294e-07, -1.1727155e-06, -1.0000001, -1.1920929e-07, 1.0000002, -1.0863108e-06, -1.5094876e-05, 0.013311386, 0.00016772747)
 bone_name = "IndexFinger2_L"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -395,7 +395,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_1ruxs")
 
-[node name="Physical Bone Thumb0_L" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="12" unique_id=11392893]
+[node name="Physical Bone Thumb0_L" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="12" unique_id=11392893]
 transform = Transform3D(0.88094115, -0.4731472, 0.008631398, 0.46295938, 0.8579073, -0.22285378, 0.0980377, 0.20031705, 0.9748137, -0.6167965, 1.3381784, -0.011528423)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5126582e-06, -1.4617538e-06, 0.020556295)
@@ -409,7 +409,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_qp7f3")
 
-[node name="Physical Bone Thumb1_L" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="13" unique_id=1950810788]
+[node name="Physical Bone Thumb1_L" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="13" unique_id=1950810788]
 transform = Transform3D(0.9465346, -0.32256475, 0.004930559, 0.3226012, 0.9464624, -0.01172452, -0.0008846719, 0.012688267, 0.9999192, -0.6170397, 1.3429201, -0.04530381)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3957519e-07, -6.986596e-08, 0.013736669)
@@ -423,11 +423,11 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_dgvwq")
 
-[node name="Physical Bone MiddleFinger1_L" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="14" unique_id=122352289]
-transform = Transform3D(0.0004711927, 0.014823827, 0.99989, 0.031796236, 0.99938434, -0.014831314, -0.9994943, 0.03179973, -4.3928205e-07, -0.6891024, 1.336184, 0.025755802)
+[node name="Physical Bone MiddleFinger1_L" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="14" unique_id=122352289]
+transform = Transform3D(0.0004711927, 0.014823827, 0.99989, 0.031796236, 0.99938434, -0.014831314, -0.9994943, 0.03179973, -4.3928205e-07, -0.6891024, 1.336184, 0.025723519)
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2841792e-05, -8.125173e-06, 0.02659988)
-body_offset = Transform3D(1.0000002, 9.495765e-06, 1.4970956e-07, 1.247493e-07, -3.8160033e-06, -1.0000001, -9.357929e-06, 1.0000002, -3.7774478e-06, 2.2837892e-05, 0.026599884, 8.225441e-06)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5108394e-05, -7.0525916e-06, 0.02659988)
+body_offset = Transform3D(1.0000002, 9.495765e-06, 1.4970956e-07, 1.247493e-07, -3.8160033e-06, -1.0000001, -9.357929e-06, 1.0000002, -3.7774478e-06, 5.5104494e-05, 0.026599884, 7.1525574e-06)
 bone_name = "MiddleFinger1_L"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -437,11 +437,11 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_feabi")
 
-[node name="Physical Bone MiddleFinger2_L" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="15" unique_id=120081318]
-transform = Transform3D(2.3845246e-07, 4.85716e-06, 1, 0.12599023, 0.9920315, -4.8484985e-06, -0.9920316, 0.12599023, -3.7540232e-07, -0.72930574, 1.3365633, 0.025643442)
+[node name="Physical Bone MiddleFinger2_L" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="15" unique_id=120081318]
+transform = Transform3D(2.3746765e-07, 4.85716e-06, 1, 0.12599023, 0.9920315, -4.848374e-06, -0.9920316, 0.12599023, -3.7637923e-07, -0.72930574, 1.3365633, 0.025443297)
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0001338571, 1.6937674e-05, 0.0140336715)
-body_offset = Transform3D(1.0000004, 1.3411045e-07, 1.0434178e-09, -3.041822e-08, -7.528199e-07, -1.0000002, 0, 1.0000005, -7.0990075e-07, 0.00013385713, 0.014033675, -1.692772e-05)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00033241502, 4.2090818e-05, 0.0140336715)
+body_offset = Transform3D(1.0000004, 1.3411045e-07, 2.02823e-09, -2.9433409e-08, -7.528199e-07, -1.0000002, 0, 1.0000005, -7.099001e-07, 0.0003324151, 0.014033675, -4.208088e-05)
 bone_name = "MiddleFinger2_L"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -451,11 +451,11 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_4rypb")
 
-[node name="Physical Bone RingFinger1_L" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="16" unique_id=1135114338]
-transform = Transform3D(0.0017297285, 0.017506534, 0.9998453, 0.098426424, 0.99498886, -0.01759178, -0.9951429, 0.098441616, -2.0448588e-06, -0.6847353, 1.3361719, 0.04889183)
+[node name="Physical Bone RingFinger1_L" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="16" unique_id=1135114338]
+transform = Transform3D(0.0017259103, 0.017506534, 0.9998453, 0.09842649, 0.99498886, -0.017591404, -0.9951429, 0.09844161, -5.845098e-06, -0.6847353, 1.3361719, 0.04889183)
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.222448e-07, 1.227555e-09, 0.022233127)
-body_offset = Transform3D(1.0000004, -6.109476e-07, 2.4823146e-06, 2.4534554e-06, 5.2533333e-06, -1.0000001, 7.4505806e-07, 1.0000002, 5.3065783e-06, 6.7055225e-08, 0.022233129, -1.1920929e-07)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0714866e-07, 1.2211032e-09, 0.022233127)
+body_offset = Transform3D(1.0000004, -6.03497e-07, 6.301116e-06, 6.2722274e-06, 5.2533333e-06, -1.0000001, 7.4505806e-07, 1.0000002, 5.306871e-06, 6.7055225e-08, 0.022233129, -1.1920929e-07)
 bone_name = "RingFinger1_L"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -465,11 +465,11 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_2l1y2")
 
-[node name="Physical Bone RingFinger2_L" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="17" unique_id=722825636]
-transform = Transform3D(9.966573e-08, 6.1665503e-07, 1, -0.082843095, 0.99656266, -6.062787e-07, -0.99656266, -0.082843095, 1.5040874e-07, -0.7195771, 1.3365631, 0.048891906)
+[node name="Physical Bone RingFinger2_L" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="17" unique_id=722825636]
+transform = Transform3D(9.966573e-08, 6.1534195e-07, 1, -0.082843095, 0.99656266, -6.049701e-07, -0.99656266, -0.082843095, 1.5029997e-07, -0.7195771, 1.3365631, 0.048891906)
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1814325e-08, 9.5324735e-09, 0.012612224)
-body_offset = Transform3D(1.0000004, 2.682209e-07, -2.4474943e-07, -2.6567403e-07, -8.140956e-07, -1, -1.1175871e-07, 1.0000002, -7.558126e-07, 1.4901161e-08, 0.012612224, 0)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1814325e-08, 9.5159125e-09, 0.012612224)
+body_offset = Transform3D(1.0000004, 2.682209e-07, -2.4474946e-07, -2.6567403e-07, -8.127825e-07, -1, -1.1175871e-07, 1.0000002, -7.544995e-07, 1.4901161e-08, 0.012612224, 0)
 bone_name = "RingFinger2_L"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -479,7 +479,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_q8x4q")
 
-[node name="Physical Bone LittleFinger1_L" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="18" unique_id=633403534]
+[node name="Physical Bone LittleFinger1_L" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="18" unique_id=633403534]
 transform = Transform3D(9.084617e-05, 0.023362348, 0.9997271, 0.0038959663, 0.99971956, -0.023362523, -0.9999925, 0.0038970255, -1.9821735e-07, -0.67925584, 1.3361778, 0.07202551)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0232097e-07, -5.7295515e-06, 0.01675498)
@@ -493,11 +493,11 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_bgij0")
 
-[node name="Physical Bone LittleFinger2_L" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="19" unique_id=1654941754]
-transform = Transform3D(3.4143974e-07, 2.5414217e-06, 1, 0.050269432, 0.9987357, -2.5553725e-06, -0.9987357, 0.050269432, 2.1325222e-07, -0.70805645, 1.3365631, 0.07202558)
+[node name="Physical Bone LittleFinger2_L" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="19" unique_id=1654941754]
+transform = Transform3D(3.4111147e-07, 2.5414217e-06, 1, 0.050269432, 0.9987357, -2.555356e-06, -0.9987357, 0.050269432, 2.1292436e-07, -0.70805645, 1.3365631, 0.07202558)
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.415825e-09, 3.103616e-08, 0.0120674325)
-body_offset = Transform3D(1.0000004, -1.3485551e-06, -3.6592576e-07, -3.918479e-07, -2.6289667e-06, -1.0000004, 1.475215e-06, 1.0000004, -2.5718953e-06, 0, 0.012067437, 0)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4118633e-09, 3.103616e-08, 0.0120674325)
+body_offset = Transform3D(1.0000004, -1.3485551e-06, -3.655975e-07, -3.9151962e-07, -2.6289667e-06, -1.0000004, 1.475215e-06, 1.0000004, -2.5718953e-06, 0, 0.012067437, 0)
 bone_name = "LittleFinger2_L"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -507,7 +507,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_624g7")
 
-[node name="Physical Bone Right shoulder" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="20" unique_id=763067648]
+[node name="Physical Bone Right shoulder" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="20" unique_id=763067648]
 transform = Transform3D(-0.12383365, -0.033680663, -0.9917312, -0.0965416, 0.99509156, -0.021740003, 0.98759556, 0.09305118, -0.12647739, 0.07281184, 1.333231, 0.01375162)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6584826e-07, -7.515819e-08, 0.06815458)
@@ -521,7 +521,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_ufsoq")
 
-[node name="Physical Bone Right arm" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="21" unique_id=1322204744]
+[node name="Physical Bone Right arm" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="21" unique_id=1322204744]
 transform = Transform3D(-0.09243139, -0.013093225, -0.995633, -0.014355704, 0.9998272, -0.011815643, 0.9956156, 0.013200877, -0.09260337, 0.26561546, 1.3361979, 0.03401868)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.2928733e-07, 5.649632e-07, 0.12576182)
@@ -535,7 +535,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_ns0ce")
 
-[node name="Physical Bone Right elbow" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="22" unique_id=412445463]
+[node name="Physical Bone Right elbow" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="22" unique_id=412445463]
 transform = Transform3D(0.038463093, -0.0185155, -0.99908847, -0.09303374, 0.9954192, -0.02202913, 0.9949198, 0.09379624, 0.036564335, 0.48434395, 1.339745, 0.042242885)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2063596e-07, -1.1487232e-07, 0.093601316)
@@ -549,7 +549,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_dhyhi")
 
-[node name="Physical Bone Right wrist" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="23" unique_id=968437943]
+[node name="Physical Bone Right wrist" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="23" unique_id=968437943]
 transform = Transform3D(-0.12202147, 0.37742215, -0.91796696, -0.98503083, -0.15950923, 0.06535375, -0.12175824, 0.9122003, 0.391236, 0.6201826, 1.338794, 0.020781504)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.636278e-08, 1.0069016e-08, 0.046104833)
@@ -563,7 +563,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_73xt7")
 
-[node name="Physical Bone IndexFinger1_R" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="24" unique_id=498805100]
+[node name="Physical Bone IndexFinger1_R" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="24" unique_id=498805100]
 transform = Transform3D(-0.0017627202, -0.017081568, -0.99985254, 0.102670394, 0.9945673, -0.017172277, 0.9947139, -0.102685526, 6.2761353e-07, 0.68533015, 1.3361759, 0.0027425943)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.172647e-07, -3.1837585e-06, 0.02282781)
@@ -577,7 +577,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_2ig0d")
 
-[node name="Physical Bone IndexFinger2_R" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="25" unique_id=433212886]
+[node name="Physical Bone IndexFinger2_R" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="25" unique_id=433212886]
 transform = Transform3D(8.5137015e-07, -1.0856852e-06, -1, -0.052060265, 0.99864393, -1.1285355e-06, 0.99864393, 0.052060265, 7.9369454e-07, 0.7213808, 1.3365633, 0.0027433299)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9426395e-07, 1.7736635e-08, 0.013311448)
@@ -591,11 +591,11 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_e5scu")
 
-[node name="Physical Bone Thumb0_R" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="26" unique_id=639942352]
-transform = Transform3D(0.88094026, 0.4731489, -0.008630616, -0.46296057, 0.8579058, -0.22285697, -0.098040275, 0.20031929, 0.974813, 0.6167947, 1.3381782, -0.01187606)
+[node name="Physical Bone Thumb0_R" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="26" unique_id=639942352]
+transform = Transform3D(0.88094026, 0.4731489, -0.008630616, -0.46296057, 0.8579058, -0.22285697, -0.098040275, 0.20031929, 0.974813, 0.61679465, 1.3381782, -0.012390647)
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4097506e-05, 6.952265e-05, 0.020894974)
-body_offset = Transform3D(0.99999964, 8.363277e-07, 1.7136335e-07, 1.4156103e-07, -9.3877316e-07, -1, -1.1678785e-06, 0.99999994, -1.1324883e-06, 3.4093857e-05, 0.020894974, -6.9499016e-05)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.452323e-05, 0.00017257959, 0.021396607)
+body_offset = Transform3D(0.99999964, 8.363277e-07, 1.7136335e-07, 1.4156103e-07, -9.3877316e-07, -1, -1.1678785e-06, 0.99999994, -1.1324883e-06, 8.4519386e-05, 0.021396607, -0.00017255545)
 bone_name = "Thumb0_R"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -605,11 +605,11 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_ns2a3")
 
-[node name="Physical Bone Thumb1_R" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="27" unique_id=76548404]
-transform = Transform3D(0.946539, 0.3225518, -0.004930508, -0.32258826, 0.9464668, -0.011725923, 0.00088434404, 0.012689567, 0.9999191, 0.6170398, 1.3429208, -0.045303866)
+[node name="Physical Bone Thumb1_R" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="27" unique_id=76548404]
+transform = Transform3D(0.946539, 0.32255182, -0.0049282946, -0.32258826, 0.9464668, -0.011726451, 0.00088207866, 0.012689354, 0.9999191, 0.6170398, 1.3429208, -0.045303866)
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.377791e-08, -5.0635787e-08, 0.013736675)
-body_offset = Transform3D(0.9999996, 6.8043846e-08, 1.7309794e-06, 1.7039129e-06, 3.8845465e-06, -0.99999994, -3.6789788e-07, 1.0000001, 3.6861748e-06, 0, 0.013736673, 0)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4881568e-08, -5.3565454e-08, 0.013736675)
+body_offset = Transform3D(0.9999996, 9.7656994e-08, 3.9952574e-06, 3.9691804e-06, 4.0978193e-06, -0.9999999, -3.966552e-07, 1.0000001, 3.8994476e-06, 0, 0.013736673, 0)
 bone_name = "Thumb1_R"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -619,7 +619,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_rgn0f")
 
-[node name="Physical Bone MiddleFinger1_R" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="28" unique_id=2057197329]
+[node name="Physical Bone MiddleFinger1_R" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="28" unique_id=2057197329]
 transform = Transform3D(0.00047179416, -0.014818848, -0.9998901, -0.03180859, 0.99938405, -0.014826356, 0.9994939, 0.03181209, 1.3689602e-07, 0.688889, 1.3361721, 0.025779283)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0547247e-06, -2.7837574e-08, 0.026386155)
@@ -633,11 +633,11 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_oa5a3")
 
-[node name="Physical Bone MiddleFinger2_R" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="29" unique_id=649084691]
-transform = Transform3D(4.7462711e-07, -4.9269656e-06, -1, -0.12599018, 0.9920316, -4.947503e-06, 0.9920315, 0.1259902, -1.4990421e-07, 0.72930586, 1.3365636, 0.025778553)
+[node name="Physical Bone MiddleFinger2_R" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="29" unique_id=649084691]
+transform = Transform3D(4.736423e-07, -4.9217133e-06, -1, -0.12599018, 0.9920316, -4.9421683e-06, 0.9920315, 0.1259902, -1.502194e-07, 0.72930586, 1.3365636, 0.025778553)
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.984305e-07, -2.2560712e-07, 0.01403359)
-body_offset = Transform3D(1.0000002, -1.4901161e-07, 2.902381e-08, -9.441106e-08, -8.328699e-07, -0.99999964, 0, 1.0000004, -9.129079e-07, 2.9802322e-07, 0.014033586, 2.3841858e-07)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.984167e-07, -2.2568082e-07, 0.01403359)
+body_offset = Transform3D(1.0000002, -1.4901161e-07, 2.8039068e-08, -9.539587e-08, -8.2761755e-07, -0.99999964, 0, 1.0000004, -9.0765576e-07, 2.9802322e-07, 0.014033586, 2.3841858e-07)
 bone_name = "MiddleFinger2_R"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -647,7 +647,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_0ymc1")
 
-[node name="Physical Bone RingFinger1_R" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="30" unique_id=1620059353]
+[node name="Physical Bone RingFinger1_R" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="30" unique_id=1620059353]
 transform = Transform3D(0.0017323768, -0.017516661, -0.9998451, -0.09842483, 0.9949888, -0.017602118, 0.99514306, 0.098440066, -3.7883737e-07, 0.6845595, 1.3366542, 0.048914872)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4772844e-05, -0.0004849533, 0.022065647)
@@ -661,11 +661,11 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_1xq4e")
 
-[node name="Physical Bone RingFinger2_R" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="31" unique_id=367391087]
-transform = Transform3D(4.8725934e-07, -7.568557e-07, -1, 0.0828432, 0.99656266, -7.138879e-07, 0.99656266, -0.0828432, 5.4828473e-07, 0.71957725, 1.3365633, 0.04889173)
+[node name="Physical Bone RingFinger2_R" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="31" unique_id=367391087]
+transform = Transform3D(4.8725934e-07, -7.575122e-07, -1, 0.0828432, 0.99656266, -7.145422e-07, 0.99656266, -0.0828432, 5.4833913e-07, 0.71957725, 1.3365633, 0.04889173)
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4710275e-08, 1.2522565e-08, 0.012612226)
-body_offset = Transform3D(1, -4.61936e-07, 4.0373948e-07, 2.9377696e-07, -8.9282844e-07, -0.99999976, 3.054738e-07, 1.0000001, -9.928916e-07, -2.9802322e-08, 0.012612224, 0)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4710275e-08, 1.2530844e-08, 0.012612226)
+body_offset = Transform3D(1, -4.61936e-07, 4.037395e-07, 2.9377696e-07, -8.93485e-07, -0.99999976, 3.054738e-07, 1.0000001, -9.93548e-07, -2.9802322e-08, 0.012612224, 0)
 bone_name = "RingFinger2_R"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -675,11 +675,11 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_4mfp1")
 
-[node name="Physical Bone LittleFinger1_R" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="32" unique_id=921831659]
-transform = Transform3D(9.112647e-05, -0.023362558, -0.9997271, -0.0038969005, 0.99971956, -0.023362733, 0.99999243, 0.0038979661, 5.9356807e-08, 0.67924756, 1.3361721, 0.07203899)
+[node name="Physical Bone LittleFinger1_R" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="32" unique_id=921831659]
+transform = Transform3D(9.1050395e-05, -0.023362558, -0.9997271, -0.003898358, 0.9997195, -0.023362735, 0.99999243, 0.0038994213, -5.0756693e-08, 0.67924756, 1.3361721, 0.07203899)
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3532955e-05, -2.0450202e-09, 0.016746346)
-body_offset = Transform3D(1.0000001, 8.486677e-07, 1.6134346e-07, 4.194602e-08, 2.1972758e-07, -0.99999976, -1.0074582e-06, 1.0000004, 1.213033e-07, 1.3530254e-05, 0.016746342, 0)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.353111e-05, -2.026333e-09, 0.016746346)
+body_offset = Transform3D(1.0000001, 2.3043249e-06, 5.1230785e-08, -6.816832e-08, 2.1972755e-07, -0.99999976, -2.4628825e-06, 1.0000002, 1.19011524e-07, 1.3530254e-05, 0.016746342, 0)
 bone_name = "LittleFinger1_R"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -689,11 +689,11 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_4bnfm")
 
-[node name="Physical Bone LittleFinger2_R" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="33" unique_id=1364923212]
-transform = Transform3D(-3.484296e-08, 2.4730548e-06, -1, -0.050267734, 0.99873585, 2.4716796e-06, 0.99873585, 0.050267734, 8.951593e-08, 0.70805675, 1.3365633, 0.072025456)
+[node name="Physical Bone LittleFinger2_R" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="33" unique_id=1364923212]
+transform = Transform3D(-3.484296e-08, 2.4783071e-06, -1, -0.050267734, 0.99873585, 2.4769251e-06, 0.99873585, 0.050267734, 8.977995e-08, 0.70805675, 1.3365633, 0.072025456)
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6845788e-09, -2.8131563e-08, 0.01206744)
-body_offset = Transform3D(1.0000002, -3.3900142e-07, -2.224655e-07, -3.412481e-07, 2.3985483e-06, -0.9999998, 1.6391277e-07, 1.0000004, 2.3311966e-06, 0, 0.012067437, 0)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6845786e-09, -2.8194941e-08, 0.01206744)
+body_offset = Transform3D(1.0000002, -3.3900142e-07, -2.2246547e-07, -3.412481e-07, 2.4038006e-06, -0.9999998, 1.6391277e-07, 1.0000004, 2.3364487e-06, 0, 0.012067437, 0)
 bone_name = "LittleFinger2_R"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
@@ -703,7 +703,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_j0jhh")
 
-[node name="Physical Bone Left leg" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="34" unique_id=973782937]
+[node name="Physical Bone Left leg" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="34" unique_id=973782937]
 transform = Transform3D(-1, 1.7900219e-07, 1.651262e-08, -2.5383276e-08, -0.23154552, 0.97282416, 1.7796104e-07, 0.97282416, 0.23154552, -0.08126104, 0.69628054, -0.026462393)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3349879e-09, 1.473915e-07, 0.21014263)
@@ -717,7 +717,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_cvqha")
 
-[node name="Physical Bone Left knee" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="35" unique_id=1474497396]
+[node name="Physical Bone Left knee" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="35" unique_id=1474497396]
 transform = Transform3D(-1, 5.8470937e-07, -3.7323552e-08, 9.740379e-08, 0.22872554, 0.97349095, 5.7774605e-07, 0.973491, -0.22872552, -0.08126104, 0.27956074, -0.0252419)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.884002e-10, 4.5330367e-08, 0.21806906)
@@ -731,7 +731,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_oqw3y")
 
-[node name="Physical Bone Left ankle" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="36" unique_id=75530912]
+[node name="Physical Bone Left ankle" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="36" unique_id=75530912]
 transform = Transform3D(-1, 9.186493e-07, 1.8703605e-07, -6.478801e-07, -0.82138157, 0.57037914, 6.776063e-07, 0.57037914, 0.82138157, -0.08126104, 0.04187485, -0.011939067)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.7780594e-10, -2.7308635e-08, 0.04452849)
@@ -745,7 +745,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_k6vo7")
 
-[node name="Physical Bone Right leg" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="37" unique_id=146759228]
+[node name="Physical Bone Right leg" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="37" unique_id=146759228]
 transform = Transform3D(-1, -1.7900187e-07, -4.3844715e-08, -1.2061236e-09, -0.23154546, 0.97282416, -1.8428936e-07, 0.97282416, 0.23154546, 0.08126104, 0.6962802, -0.026462337)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.8253144e-10, -3.995602e-09, 0.21014304)
@@ -759,7 +759,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_0ee8v")
 
-[node name="Physical Bone Right knee" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="38" unique_id=1785518987]
+[node name="Physical Bone Right knee" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="38" unique_id=1785518987]
 transform = Transform3D(-1, -5.8470914e-07, 2.0240057e-08, -1.1403438e-07, 0.22872554, 0.97349095, -5.738384e-07, 0.973491, -0.22872552, 0.08126104, 0.2795604, -0.025241785)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0368759e-09, 2.6704129e-08, 0.21806951)
@@ -773,7 +773,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_g2bvk")
 
-[node name="Physical Bone Right ankle" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="39" unique_id=1563778436]
+[node name="Physical Bone Right ankle" type="PhysicalBone3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="39" unique_id=1563778436]
 transform = Transform3D(-1, -9.1864877e-07, -1.0337429e-07, 6.9559854e-07, -0.82138157, 0.57037914, -6.088878e-07, 0.57037914, 0.82138157, 0.08126104, 0.041875154, -0.011938997)
 joint_type = 1
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8474696e-09, 1.0307663e-07, 0.044528298)
@@ -787,7 +787,7 @@ joint_constraints/impulse_clamp = 0.0
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_ik2ef")
 
-[node name="PhysicalBoneSimulator3D" type="PhysicalBoneSimulator3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(987254810, 1134196980) index="40" unique_id=170973099]
+[node name="PhysicalBoneSimulator3D" type="PhysicalBoneSimulator3D" parent="CharacterBody/CollisionShape3D/SherryGodotModel/Ragdoll/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1626320784, 1733367552) index="40" unique_id=170973099]
 
 [node name="XROrigin3D" type="XROrigin3D" parent="CharacterBody" unique_id=1330478284]
 

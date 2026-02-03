@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dbkiigg2vm2x7"]
 
-[ext_resource type="Script" uid="uid://cfoluhm1tmipf" path="res://objects/axis.gd" id="1_8umds"]
-[ext_resource type="PackedScene" uid="uid://dofmep1rik5kc" path="res://objects/vector.tscn" id="1_axhod"]
+[ext_resource type="Script" uid="uid://cfoluhm1tmipf" path="res://Spectator Camera Stuff/objects (Camera)/axis.gd" id="1_8umds"]
+[ext_resource type="PackedScene" uid="uid://dofmep1rik5kc" path="res://Spectator Camera Stuff/objects (Camera)/vector.tscn" id="1_axhod"]
 
 [node name="Axis" type="Node3D"]
 script = ExtResource("1_8umds")

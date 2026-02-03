@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cd64h3qcmpjqu"]
 
-[ext_resource type="Material" uid="uid://desmwombb44cf" path="res://materials/floor_material.tres" id="1_3f04m"]
+[ext_resource type="Material" uid="uid://desmwombb44cf" path="res://Assets/materials/floor_material.tres" id="1_3f04m"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_h2yge"]
 

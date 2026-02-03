@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dbxpilbospngo"
-path="res://.godot/imported/SherryGodotModel.blend-12a36271ee7eb96a00c9a213b1d8228f.scn"
+path="res://.godot/imported/SherryGodotModel.blend-b34ccc022781a8658ff3df819efc6f99.scn"
 
 [deps]
 
-source_file="res://Mesh/SherryGodotModel.blend"
-dest_files=["res://.godot/imported/SherryGodotModel.blend-12a36271ee7eb96a00c9a213b1d8228f.scn"]
+source_file="res://Assets/Mesh/SherryGodotModel.blend"
+dest_files=["res://.godot/imported/SherryGodotModel.blend-b34ccc022781a8658ff3df819efc6f99.scn"]
 
 [params]
 

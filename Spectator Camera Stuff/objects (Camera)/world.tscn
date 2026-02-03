@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://72x8dv67np16"]
 
-[ext_resource type="PackedScene" uid="uid://cd64h3qcmpjqu" path="res://objects/floor.tscn" id="1_rxwto"]
-[ext_resource type="PackedScene" uid="uid://623lyc5v3wn5" path="res://objects/wall.tscn" id="2_qbjm4"]
+[ext_resource type="PackedScene" uid="uid://cd64h3qcmpjqu" path="res://Spectator Camera Stuff/objects (Camera)/floor.tscn" id="1_rxwto"]
+[ext_resource type="PackedScene" uid="uid://623lyc5v3wn5" path="res://Spectator Camera Stuff/objects (Camera)/wall.tscn" id="2_qbjm4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rxwto"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
