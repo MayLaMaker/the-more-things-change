@@ -263,5 +263,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17894566, 0)
 [node name="Character" parent="." unique_id=1735264460 instance=ExtResource("4_lquwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97236776, 0.06528938, -0.6280707)
 
-[node name="Character2" parent="." unique_id=1128941491 instance=ExtResource("5_lquwl")]
+[node name="Character2" parent="." unique_id=554249512 instance=ExtResource("5_lquwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.98425645, 0.050027095, -0.6269882)
