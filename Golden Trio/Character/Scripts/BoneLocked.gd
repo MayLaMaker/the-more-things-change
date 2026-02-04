@@ -1,11 +1,10 @@
 extends Node3D
-
 @export var physical_skel: Skeleton3D
-
 func _ready():
 	physical_skel.physical_bones_start_simulation()
-	call_deferred("_disable_parent_child_collisions")
 
+## --- Disable Parent/Child Bone Collisions ---
+	call_deferred("_disable_parent_child_collisions")
 func _disable_parent_child_collisions():
 	var bones: Dictionary = {}
 	
