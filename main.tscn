@@ -260,11 +260,11 @@ skeleton = NodePath("../..")
 [node name="Character" parent="." unique_id=1735264460 instance=ExtResource("4_lquwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97236776, 0.06528938, 3.8364701)
 
-[node name="Character3" parent="." unique_id=931363748 instance=ExtResource("5_lquwl")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.2767134, 0.10005419, -0.6405518)
-
 [node name="Character2" parent="." unique_id=554249512 instance=ExtResource("5_lquwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.98425645, 0.050027095, -0.6269882)
+
+[node name="Character3" parent="." unique_id=574083109 instance=ExtResource("5_lquwl")]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, -0.19075668, 2.0089798, -0.6269882)
 
 [node name="PlayerDebug" parent="." unique_id=1128502710 instance=ExtResource("5_7mycd")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.42346036, 0.9397857, -3.0860815)
