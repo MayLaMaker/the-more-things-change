@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c835cn65cr2hg" path="res://Golden Trio/Character/character 1.0.tscn" id="4_lquwl"]
 [ext_resource type="PackedScene" uid="uid://bfnb1b2d7uwht" path="res://Golden Trio/Player/PlayerDebug.tscn" id="5_7mycd"]
 [ext_resource type="PackedScene" uid="uid://snjao2sbj4cr" path="res://Golden Trio/Character/character 2.0.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://cxkxoi0vgbscy" path="res://Golden Trio/Player/Player1.0.tscn" id="6_7mycd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -261,10 +262,13 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97236776, 0.06528938, 3.8364701)
 
 [node name="Character2" parent="." unique_id=554249512 instance=ExtResource("5_lquwl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.98425645, 0.050027095, -0.6269882)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.98425645, 0.069676876, -0.6269882)
 
 [node name="Character3" parent="." unique_id=574083109 instance=ExtResource("5_lquwl")]
 transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, -0.19075668, 2.0089798, -0.6269882)
 
 [node name="PlayerDebug" parent="." unique_id=1128502710 instance=ExtResource("5_7mycd")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.42346036, 0.9397857, -3.0860815)
+
+[node name="PlayerRoot" parent="." unique_id=543237386 instance=ExtResource("6_7mycd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.121546, 0.10399996, 1.1542506)
