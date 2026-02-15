@@ -3,10 +3,10 @@ extends Node3D
 @export var animated_skel : Skeleton3D
 @export var physical_skel : Skeleton3D
 
-@export var linear_spring_stiffness: float = 100
-@export var linear_spring_damping: float = 10
+@export var linear_spring_stiffness: float = 1000
+@export var linear_spring_damping: float = 2.0
 @export var angular_spring_stiffness: float = 50.0
-@export var angular_spring_damping: float = 20.0
+@export var angular_spring_damping: float = 2.0
 
 var physics_bones
 
