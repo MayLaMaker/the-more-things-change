@@ -23,6 +23,7 @@ run/main_scene.mobile="uid://tktbv6he63n6"
 
 [audio]
 
+buses/default_bus_layout="uid://c5w6nwo5tr6u3"
 driver/enable_input=true
 
 [autoload]
