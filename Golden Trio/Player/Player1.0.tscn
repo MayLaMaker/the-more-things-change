@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://34jvnjm4q6rl" path="res://Golden Trio/Player/Scripts/Player.gd" id="2_rebjx"]
 [ext_resource type="PackedScene" uid="uid://dbxpilbospngo" path="res://Assets/Mesh/SherryGodotModel.blend" id="3_mqcsf"]
-[ext_resource type="Script" uid="uid://bjs4cbp5dx1d3" path="res://Golden Trio/Character/Scripts/Enable_Skeleton_IK.gd" id="3_p31nf"]
+[ext_resource type="Script" uid="uid://bjs4cbp5dx1d3" path="res://Golden Trio/Character/Scripts/SkeletonIK.gd" id="3_p31nf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vbank"]
 radius = 0.16357422

@@ -1,5 +1,6 @@
 extends Node3D
 @export var physical_skel: Skeleton3D
+##-- Ragdoll ---
 func _ready():
 	physical_skel.physical_bones_start_simulation()
 

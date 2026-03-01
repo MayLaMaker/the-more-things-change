@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://uxc80q35vh7l" path="res://Golden Trio/Object/ObjectGrabPhysics.gd" id="4_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://c835cn65cr2hg" path="res://Golden Trio/Character/character 1.0.tscn" id="4_lquwl"]
 [ext_resource type="PackedScene" uid="uid://bfnb1b2d7uwht" path="res://Golden Trio/Player/PlayerDebug.tscn" id="5_7mycd"]
 [ext_resource type="PackedScene" uid="uid://snjao2sbj4cr" path="res://Golden Trio/Character/character 2.0.tscn" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://cxkxoi0vgbscy" path="res://Golden Trio/Player/Player1.0.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://sg7lyw05wtrm" path="res://Golden Trio/Character/character 3.0.tscn" id="6_272bh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_h2yge"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -64,9 +64,6 @@ shape = SubResource("BoxShape3D_5vw27")
 mesh = SubResource("BoxMesh_lquwl")
 skeleton = NodePath("../..")
 
-[node name="Character" parent="." unique_id=1735264460 instance=ExtResource("4_lquwl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.405219, 0.06528938, -0.6199983)
-
 [node name="Character2" parent="." unique_id=554249512 instance=ExtResource("5_lquwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55140525, 0.069676876, -0.6269882)
 
@@ -75,3 +72,6 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.4
 
 [node name="PlayerRoot" parent="." unique_id=543237386 instance=ExtResource("6_7mycd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3804518, 0.10399996, 1.1542506)
+
+[node name="Character3" parent="." unique_id=1735264460 instance=ExtResource("6_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3167555, 0.050027333, -0.6200611)
