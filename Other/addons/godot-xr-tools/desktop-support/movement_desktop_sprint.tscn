@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dgm5op1hausw5"]
+
+[ext_resource type="Script" uid="uid://cdtw2psp3hixk" path="res://Other/addons/godot-xr-tools/desktop-support/movement_desktop_sprint.gd" id="1_md0f7"]
+
+[node name="MovementDesktopSprint" type="Node" groups=["movement_providers"]]
+script = ExtResource("1_md0f7")

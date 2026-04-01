@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cvokcudrffkgc"]
+
+[ext_resource type="Script" uid="uid://b6hk6034aiqv7" path="res://Other/addons/godot-xr-tools/functions/movement_glide.gd" id="1"]
+
+[node name="MovementGlide" type="Node" groups=["movement_providers"]]
+script = ExtResource("1")

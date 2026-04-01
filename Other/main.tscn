@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://tktbv6he63n6"]
+
+[ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://Other/addons/godot-xr-tools/xr/start_xr.tscn" id="1_os3b7"]
+[ext_resource type="Script" uid="uid://uxc80q35vh7l" path="res://Golden Trio/Object/ObjectGrabPhysics.gd" id="2_db1bl"]
+[ext_resource type="PackedScene" uid="uid://bfnb1b2d7uwht" path="res://Golden Trio/Player/Player_Debug.tscn" id="4_7433c"]
+[ext_resource type="PackedScene" uid="uid://cxkxoi0vgbscy" path="res://Golden Trio/Player/Player_Character.tscn" id="5_3py0q"]
+[ext_resource type="PackedScene" uid="uid://lmhd8xldy066" path="res://Golden Trio/Character/Character.tscn" id="7_pg4dd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
+size = Vector3(50, 0.1, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
+size = Vector3(50, 0.1, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5vw27"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lquwl"]
+
+[node name="Main" type="Node3D" unique_id=512561389]
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=461786916]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_color = Color(0.8745098, 1, 1, 1)
+shadow_enabled = true
+
+[node name="StartXR" parent="." unique_id=1911185701 instance=ExtResource("1_os3b7")]
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=294575075]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=507517956]
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/CollisionShape3D" unique_id=776363594]
+mesh = SubResource("BoxMesh_h2yge")
+
+[node name="Cube" type="RigidBody3D" parent="." unique_id=844190754]
+editor_description = "Grab physics test cube."
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0967896, 0.58406377, 2.3832352)
+mass = 4.0
+script = ExtResource("2_db1bl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube" unique_id=863419111]
+shape = SubResource("BoxShape3D_5vw27")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cube/CollisionShape3D" unique_id=6357353]
+mesh = SubResource("BoxMesh_lquwl")
+skeleton = NodePath("../..")
+
+[node name="Player_Debug" parent="." unique_id=1128502710 instance=ExtResource("4_7433c")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.42346036, 0.9397857, -3.0860815)
+
+[node name="Player_Character" parent="." unique_id=543237386 instance=ExtResource("5_3py0q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3804518, 0.10399996, 1.1542506)
+
+[node name="NPC_Character" parent="." unique_id=127626238 instance=ExtResource("7_pg4dd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2518914, 0.05002757, -1.4167427)

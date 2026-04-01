@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c8jtmtuihfujs"]
+
+[ext_resource type="Script" uid="uid://0piu5s2utgk6" path="res://Other/addons/godot-xr-tools/audio/surface_audio.gd" id="1"]
+
+[node name="SurfaceAudio" type="Node"]
+script = ExtResource("1")

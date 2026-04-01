@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://kyhaogt0a4q8"]
+
+[ext_resource type="Script" uid="uid://bsrfbbobrx5ae" path="res://Other/addons/godot-xr-tools/functions/movement_flight.gd" id="1"]
+
+[node name="MovementFlight" type="Node" groups=["movement_providers"]]
+script = ExtResource("1")

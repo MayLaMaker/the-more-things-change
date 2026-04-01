@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://clt88d5d1dje4"]
+
+[ext_resource type="Script" uid="uid://by551cslchf7e" path="res://Other/addons/godot-xr-tools/functions/movement_crouch.gd" id="1"]
+
+[node name="MovementCrouch" type="Node" groups=["movement_providers"]]
+script = ExtResource("1")
