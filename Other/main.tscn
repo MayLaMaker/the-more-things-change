@@ -49,4 +49,3 @@ skeleton = NodePath("../..")
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.42346036, 0.9397857, -3.0860815)
 
 [node name="NPC_Character" parent="." unique_id=127626238 instance=ExtResource("7_pg4dd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2518914, 0.05002757, -1.4167427)

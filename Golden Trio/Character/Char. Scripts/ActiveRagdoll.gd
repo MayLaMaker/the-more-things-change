@@ -8,6 +8,7 @@ var physics_bones = [] # all physical bones
 var current_delta:float
 func _ready():
 	physical_skel.physical_bones_start_simulation()# activate ragdoll
+	call_deferred("_disable_parent_child_collisions")
 	physics_bones = physical_skel.get_children().filter(func(x): return x is PhysicalBone3D) # get all the physical bones
 func _physics_process(delta):
 	current_delta = delta
@@ -21,3 +22,29 @@ func _on_skeleton_3d_skeleton_updated() -> void:
 		var torque = hookes_law(rotation_difference.get_euler(), b.angular_velocity, angular_spring_stiffness, angular_spring_damping)
 		torque = torque.limit_length(max_angular_force)
 		b.angular_velocity += torque * current_delta
+## (Consider Removing Below)
+		var position_difference: Vector3 = target_transform.origin - current_transform.origin
+		var force: Vector3 = hookes_law(position_difference, b.linear_velocity, linear_spring_stiffness, linear_spring_damping)
+		b.linear_velocity += (force * current_delta)
+@export var linear_spring_stiffness: float = 0
+@export var linear_spring_damping: float = 0
+
+func _disable_parent_child_collisions():
+	var bones: Dictionary = {}
+	# find all PhysicalBone3D nodes under the skeleton
+	for node in physical_skel.get_children():
+		if node is PhysicalBone3D:
+			var bid: int = node.get_bone_id()
+			if bid >= 0:
+				bones[bid] = node
+	# for each physical bone, disable collisions with its parent
+	for key in bones.keys():
+		var bid: int = int(key)  # explicitly cast to int
+		var parent_idx: int = physical_skel.get_bone_parent(bid)
+		if parent_idx == -1:
+			continue
+		if bones.has(parent_idx):
+			var child_body: PhysicalBone3D = bones[bid]
+			var parent_body: PhysicalBone3D = bones[parent_idx]
+			child_body.add_collision_exception_with(parent_body)
+			parent_body.add_collision_exception_with(child_body)
