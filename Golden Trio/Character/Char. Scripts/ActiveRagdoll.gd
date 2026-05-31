@@ -28,7 +28,6 @@ func _on_skeleton_3d_skeleton_updated() -> void:
 		b.linear_velocity += (force * current_delta)
 @export var linear_spring_stiffness: float = 0
 @export var linear_spring_damping: float = 0
-
 func _disable_parent_child_collisions():
 	var bones: Dictionary = {}
 	# find all PhysicalBone3D nodes under the skeleton
