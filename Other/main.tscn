@@ -46,6 +46,6 @@ mesh = SubResource("BoxMesh_lquwl")
 skeleton = NodePath("../..")
 
 [node name="Player_Debug" parent="." unique_id=1128502710 instance=ExtResource("4_7433c")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.94, -3.086)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.94, -1.4760506)
 
 [node name="NPC_Character" parent="." unique_id=127626238 instance=ExtResource("7_pg4dd")]
