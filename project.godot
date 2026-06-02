@@ -33,7 +33,9 @@ XRToolsRumbleManager="*uid://33kk10s1m31n"
 
 [display]
 
-window/size/resizable=false
+window/size/viewport_width=576
+window/size/viewport_height=324
+window/size/mode=1
 window/size/always_on_top=true
 
 [editor_plugins]
