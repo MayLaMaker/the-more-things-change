@@ -1,6 +1,6 @@
 extends Node3D
-@export var angular_spring_stiffness: float = 18000.0 # spring stuff
-@export var angular_spring_damping: float = 80.0
+@export var angular_spring_stiffness: float = 400.0 # spring stuff
+@export var angular_spring_damping: float = 8.0
 @export var max_angular_force: float = 9999.0
 var physics_bones = [] # all physical bones
 @export var physical_skel : Skeleton3D # turn it into ragdoll
@@ -25,8 +25,8 @@ func _on_skeleton_3d_skeleton_updated() -> void:
 		var position_difference: Vector3 = target_transform.origin - current_transform.origin
 		var force: Vector3 = hookes_law(position_difference, b.linear_velocity, linear_spring_stiffness, linear_spring_damping)
 		b.linear_velocity += (force * current_delta)
-@export var linear_spring_stiffness: float = 200.0
-@export var linear_spring_damping: float = 5.0
+@export var linear_spring_stiffness: float = 400.0
+@export var linear_spring_damping: float = 8.0
 func _disable_parent_child_collisions():
 	var bones: Dictionary = {}
 	for node in physical_skel.get_children(): # find all PhysicalBone3D nodes under the skeleton

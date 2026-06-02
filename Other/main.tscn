@@ -35,7 +35,7 @@ mesh = SubResource("BoxMesh_h2yge")
 [node name="Cube" type="RigidBody3D" parent="." unique_id=844190754]
 editor_description = "Grab physics test cube."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0967896, 0.58406377, 2.3832352)
-mass = 4.0
+mass = 100.0
 script = ExtResource("2_db1bl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cube" unique_id=863419111]
