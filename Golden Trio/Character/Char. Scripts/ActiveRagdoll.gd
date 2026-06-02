@@ -22,7 +22,6 @@ func _on_skeleton_3d_skeleton_updated() -> void:
 		var torque = hookes_law(rotation_difference.get_euler(), b.angular_velocity, angular_spring_stiffness, angular_spring_damping)
 		torque = torque.limit_length(max_angular_force)
 		b.angular_velocity += torque * current_delta
-## (Consider Removing Below)
 		var position_difference: Vector3 = target_transform.origin - current_transform.origin
 		var force: Vector3 = hookes_law(position_difference, b.linear_velocity, linear_spring_stiffness, linear_spring_damping)
 		b.linear_velocity += (force * current_delta)
@@ -30,18 +29,14 @@ func _on_skeleton_3d_skeleton_updated() -> void:
 @export var linear_spring_damping: float = 5.0
 func _disable_parent_child_collisions():
 	var bones: Dictionary = {}
-	# find all PhysicalBone3D nodes under the skeleton
-	for node in physical_skel.get_children():
+	for node in physical_skel.get_children(): # find all PhysicalBone3D nodes under the skeleton
 		if node is PhysicalBone3D:
 			var bid: int = node.get_bone_id()
-			if bid >= 0:
-				bones[bid] = node
-	# for each physical bone, disable collisions with its parent
-	for key in bones.keys():
+			if bid >= 0:bones[bid] = node
+	for key in bones.keys(): # for each physical bone, disable collisions with its parent
 		var bid: int = int(key)  # explicitly cast to int
 		var parent_idx: int = physical_skel.get_bone_parent(bid)
-		if parent_idx == -1:
-			continue
+		if parent_idx == -1:continue
 		if bones.has(parent_idx):
 			var child_body: PhysicalBone3D = bones[bid]
 			var parent_body: PhysicalBone3D = bones[parent_idx]
