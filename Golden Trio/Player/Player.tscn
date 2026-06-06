@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://e17fpoqo4rkk"]
+
+[ext_resource type="Script" uid="uid://bgyjvdjpjehup" path="res://Golden Trio/Player/Play. Scripts/HMD&Hands.gd" id="1_6r8f0"]
+[ext_resource type="PackedScene" uid="uid://lmhd8xldy066" path="res://Golden Trio/Character/Character.tscn" id="1_d0pjw"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_t56iq"]
+radius = 0.063
+height = 0.125
+radial_segments = 4
+rings = 1
+
+[node name="Player" type="Node3D" unique_id=1781074009]
+
+[node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=1254597908 node_paths=PackedStringArray("HMD_target", "controller_target_l", "controller_target_r", "HMD", "controller_l", "controller_r")]
+script = ExtResource("1_6r8f0")
+HMD_target = NodePath("../Character/Body")
+controller_target_l = NodePath("../Character/Targets/Target_Hand_L")
+controller_target_r = NodePath("../Character/Targets/Target_Hand_R")
+HMD = NodePath("XRCamera3D")
+controller_l = NodePath("XRController3D_L")
+controller_r = NodePath("XRController3D_R")
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D" unique_id=1574258765]
+
+[node name="XRController3D_L" type="XRController3D" parent="XROrigin3D" unique_id=1723198460]
+tracker = &"left_hand"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/XRController3D_L" unique_id=308307850]
+mesh = SubResource("SphereMesh_t56iq")
+
+[node name="XRController3D_R" type="XRController3D" parent="XROrigin3D" unique_id=464144491]
+tracker = &"right_hand"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/XRController3D_R" unique_id=1385777257]
+mesh = SubResource("SphereMesh_t56iq")
+
+[node name="Character" parent="." unique_id=1735264460 instance=ExtResource("1_d0pjw")]

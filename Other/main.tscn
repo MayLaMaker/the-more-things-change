@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://Other/addons/godot-xr-tools/xr/start_xr.tscn" id="1_os3b7"]
 [ext_resource type="Script" uid="uid://uxc80q35vh7l" path="res://Golden Trio/Object/ObjectGrabPhysics.gd" id="2_db1bl"]
 [ext_resource type="PackedScene" uid="uid://bfnb1b2d7uwht" path="res://Golden Trio/Player/Player_Debug.tscn" id="4_7433c"]
+[ext_resource type="PackedScene" uid="uid://e17fpoqo4rkk" path="res://Golden Trio/Player/Player.tscn" id="5_sxval"]
 [ext_resource type="PackedScene" uid="uid://lmhd8xldy066" path="res://Golden Trio/Character/Character.tscn" id="7_pg4dd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
@@ -49,3 +50,6 @@ skeleton = NodePath("../..")
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.94, -1.4760506)
 
 [node name="NPC_Character" parent="." unique_id=127626238 instance=ExtResource("7_pg4dd")]
+
+[node name="Player" parent="." unique_id=1781074009 instance=ExtResource("5_sxval")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010472178, 0.11250019, 1.3344631)
